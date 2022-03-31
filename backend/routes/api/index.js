@@ -8,10 +8,12 @@ const usersRouter = require('./users.js');
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 
+
+/* TEST ROUTE
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body })
 });
-
+*/
 
 
 
