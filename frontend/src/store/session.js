@@ -24,11 +24,13 @@ export const setSessionUser = credentials => async dispatch => {
 
   if( response.ok ){
     const user = await response.json();
-    console.log(user);
     dispatch(set(user))
+    return null;
+  } else {
+    const data = await response.json();
+    return data?.errors;
   }
 
-  return response;
 };
 
 export default function sessionUserReducer(state = null, action) {

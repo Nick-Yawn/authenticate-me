@@ -25,12 +25,8 @@ export default function LoginFormPage() {
 
   const handleLogin = async e => {
     e.preventDefault();
-    const response = await dispatch(setSessionUser({credential, password}));
-    if( !response.ok ){ // if response is ok, we will already have parsed the data stream to set session
-      const data = await response.json();
-
-      if( data?.errors ) setErrors(data.errors);
-    }
+    const loginErrors = await dispatch(setSessionUser({credential, password}));
+    if( loginErrors ) setErrors(loginErrors);
   }
 
   return (
