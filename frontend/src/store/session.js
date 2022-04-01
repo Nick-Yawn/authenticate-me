@@ -15,7 +15,8 @@ export const unset = () => ({
 
 export const setSessionUser = credentials => async dispatch => {
   console.log(credentials);
-   const response = await csrfFetch('/api/session', {
+   
+  const response = await csrfFetch('/api/session', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(credentials)
@@ -26,6 +27,8 @@ export const setSessionUser = credentials => async dispatch => {
     console.log(user);
     dispatch(set(user))
   }
+
+  return response;
 };
 
 export default function sessionUserReducer(state = null, action) {
