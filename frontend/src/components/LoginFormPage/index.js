@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSessionUser } from '../../store/session.js' 
 import { Redirect } from 'react-router-dom';
 
+require('./index.css');
+
 export default function LoginFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session?.user);
@@ -30,7 +32,7 @@ export default function LoginFormPage() {
   }
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} className="login-form">
       <ul>
         {errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>

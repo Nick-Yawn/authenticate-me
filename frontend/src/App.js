@@ -1,6 +1,8 @@
 import { Route, Switch } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 
+require('./App.css');
+
 function App() {
   return (
     <Switch>
