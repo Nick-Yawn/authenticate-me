@@ -36,6 +36,7 @@ module.exports = {
       Example:
     */
       return queryInterface.bulkDelete('users', 
-        { [Sequelize.Op.in]: ['Demo-lition', 'FakeUser1','FakeUser2'] }, {});
+        { username: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }, 
+        {});
   }
 };

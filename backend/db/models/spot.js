@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'district_id'
     });
     Spot.hasMany(models.Image, {
-      foreignKey: 'spot_id'
+      foreignKey: 'spot_id',
+      onDelete: 'cascade'
     });
     Spot.belongsToMany(models.Amenity, {
       through: 'spot_amenities',
@@ -30,7 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'spot_id'
     }); 
     Spot.hasMany(models.SpotAmenity, {
-      foreignKey: 'spot_id'
+      foreignKey: 'spot_id',
+      onDelete: 'cascade'
     })
     Spot.belongsToMany(models.User, {
       through: 'favorites',
@@ -39,10 +41,12 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Favorites'// this is users that have favorited this spot. Will not be used, though
     });
     Spot.hasMany(models.Review, {
-      foreignKey: 'spot_id'
+      foreignKey: 'spot_id',
+      onDelete: 'cascade'
     }) 
     Spot.hasMany(models.Booking, {
-      foreignKey: 'spot_id'
+      foreignKey: 'spot_id',
+      onDelete: 'cascade'
     })
   };
   return Spot;
