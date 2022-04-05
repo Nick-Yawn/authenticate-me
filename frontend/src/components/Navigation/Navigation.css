@@ -1,8 +1,14 @@
+
 .nav-bar {
   display: flex;
   width: 100%; 
   justify-content: space-between;
   align-items: center;
+  height: 80px;
+  box-sizing: border-box;
+  padding: 0px 80px;
+  border-bottom: 1px solid var(--main-element-color);
+  background-color: var(--main-background-color);
 }
 
 .nav-bar-links {
@@ -10,6 +16,23 @@
   padding: 10px;
 }
 
-.profile-dropdown {
-  border: 1px black solid;
+.profile-hamburger {
+  border: 1px solid;
+  border-color: var(--main-element-color);
+  width: 77px; 
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 21px;
+  gap: 13px;
+}
+
+.profile-hamburger:hover {
+  cursor: pointer;
+  
+}
+
+.profile-hamburger > i {
+  color: var(--main-element-color); 
 }

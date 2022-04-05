@@ -4,6 +4,7 @@ html {
 
 body {
   height: 100%;
+  margin: 0px;
 }
 
 #root {
@@ -11,7 +12,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;  
+
+  --main-element-color: rgba(0,0,0,.5);
+  --main-background-color: white;
 }
+
 
 

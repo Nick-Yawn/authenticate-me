@@ -1,6 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
+import './ProfileButton.css' 
+
+function ProfileDropdown({ user }){
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.logout());
+  };
+
+  const redirectToLogin = e => {
+    history.push('/login') 
+  }
+
+  const redirectToSignUp = e => {
+    history.push('/signup') 
+  }
+
+  return (
+          <ul className="profile-dropdown">
+          { user && (
+            <>
+              <li> {user?.email} </li>
+              <li> {user?.username} </li>
+              <li className='dropdown-clickable'
+                 onClick={logout}> Logout </li>
+            </>        
+          )}
+          { !user && (
+            <>
+              <li className='dropdown-clickable' 
+                onClick={redirectToLogin}> Login </li>
+              <li className='dropdown-clickable'
+                onClick={redirectToSignUp}> Sign Up </li>
+            </>
+          )}
+          </ul>
+        )
+}
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -23,26 +65,33 @@ function ProfileButton({ user }) {
     }
   }, [showMenu]);
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.logout());
-  };
+
+  let dropdownContent;
+
+  if( user ){
+    dropdownContent = (
+      <>
+      <li> Login </li>
+      <li> Sign Up </li>
+      </>
+    );
+  } else { 
+    dropdownContent = (
+      <>
+        <li> user?.email </li>
+        <li> user?.username </li>
+      </>
+    );
+
+  }
 
   return (
     <>
-      <button onClick={openMenu}>
-        {/*<i className="fas fa-user-circle" />*/}
-        PROFILE ICONS
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
+      <div onClick={openMenu} className="profile-hamburger">
+        <i className="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-user"></i>
+      </div>
+      {showMenu && (<ProfileDropdown user={user} />)}
     </>
   );
 }

@@ -1,0 +1,18 @@
+
+
+.profile-dropdown {
+  position: absolute;  
+  background-color: var(--main-background-color);
+  width: 180px;
+  right: 50px;
+  border-radius: 9px;
+  border: 1px solid var(--main-element-color);
+}
+
+.profile-dropdown > * {
+  padding: 4px 8px;
+}
+
+.dropdown-clickable:hover{
+  cursor: pointer;
+}
