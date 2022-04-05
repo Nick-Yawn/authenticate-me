@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       loginUser: {
         attributes: {}
       }
-    }
+    },
+    underscored: true
   });
 
   User.prototype.toSafeObject = function() {
