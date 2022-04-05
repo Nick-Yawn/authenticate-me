@@ -10,6 +10,7 @@ Table users {
 Table spots {
   district_id int
   id int
+
   address varchar
   city varchar
   state varchar
@@ -62,6 +63,17 @@ Table districts {
   name varchar
 }
 
+Table amenities {
+  id int
+  name varchar
+  icon_class varchar
+}
+
+Table spot_amenities {
+  id int
+  spot_id int
+  amenity_id int
+}
 // Creating references
 // You can also define relaionship separately
 // > many-to-one; < one-to-many; - one-to-one
@@ -76,3 +88,5 @@ Ref: spots.id < reviews.spot_id
 Ref: users.id < reviews.user_id
 Ref: users.id < favorites.user_id
 Ref: spots.id < favorites.spot_id
+Ref: amenities.id < spot_amenities.amenity_id
+Ref: spots.id < spot_amenities.spot_id

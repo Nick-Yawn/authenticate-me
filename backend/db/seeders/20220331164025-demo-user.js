@@ -9,21 +9,21 @@ module.exports = {
 
       Example:
     */
-      return queryInterface.bulkInsert('Users', [
+      return queryInterface.bulkInsert('users', [
         {
           email: 'demo@user.io',
           username: 'Demo-lition',
-          hashedPassword: bcrypt.hashSync('password')
+          hashed_password: bcrypt.hashSync('password')
         },
         {
           email: 'user1@user.io',
           username: 'FakeUser1',
-          hashedPassword: bcrypt.hashSync('password2')
+          hashed_password: bcrypt.hashSync('password2')
         },
         {
           email: 'user2@user.io',
           username: 'FakeUser2',
-          hashedPassword: bcrypt.hashSync('password3')
+          hashed_password: bcrypt.hashSync('password3')
         }
       ], {});
   },
@@ -35,7 +35,7 @@ module.exports = {
 
       Example:
     */
-      return queryInterface.bulkDelete('Users', 
+      return queryInterface.bulkDelete('users', 
         { [Sequelize.Op.in]: ['Demo-lition', 'FakeUser1','FakeUser2'] }, {});
   }
 };

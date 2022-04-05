@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       loginUser: {
         attributes: {}
       }
-    }
+    },
+    underscored: true
   });
 
   User.prototype.toSafeObject = function() {
@@ -86,7 +87,15 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   User.associate = function(models) {
-    // associations can be defined here
+    User.hasMany(models.Spot, { foreignKey: 'user_id' });
+    User.hasMany(models.Review, { foreignKey: 'user_id' });
+    User.hasMany(models.Booking, { foreignKey: 'user_id' });
+    User.belongsToMany(models.Spot, {
+      through: 'favorites',
+      otherKey: 'spot_id',
+      foreignKey: 'user_id',
+      as: 'Favorites'
+    });
   };
 
   return User;
