@@ -21,11 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     Spot.belongsTo(models.District, {
       foreignKey: 'district_id'
     });
-/*
     Spot.hasMany(models.Image, {
       foreignKey: 'spot_id'
     });
-*/
     Spot.belongsToMany(models.Amenity, {
       through: 'spot_amenities',
       otherKey: 'amenity_id',
