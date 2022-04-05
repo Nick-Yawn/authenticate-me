@@ -11,7 +11,7 @@ module.exports = {
       spotId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        field: 'spot_id'
+        field: 'spot_id',
         references: { model: 'spots'}
       },
       amenityId: {
