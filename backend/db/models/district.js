@@ -9,8 +9,10 @@ module.exports = (sequelize, DataTypes) => {
   {
     underscored: true
   });
-  district.associate = function(models) {
-    
+  District.associate = function(models) {
+    District.hasMany(models.Spot, {
+      foreignKey: 'district_id'
+    })
   };
-  return district;
+  return District;
 };
