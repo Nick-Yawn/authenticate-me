@@ -54,36 +54,13 @@ function ProfileButton({ user }) {
   
   useEffect(() => {
     if (showMenu){
-
       const closeMenu = () => {
         setShowMenu(false);
       };
-
       document.addEventListener('click', closeMenu);
-    
       return () => document.removeEventListener("click", closeMenu);
     }
   }, [showMenu]);
-
-
-  let dropdownContent;
-
-  if( user ){
-    dropdownContent = (
-      <>
-      <li> Login </li>
-      <li> Sign Up </li>
-      </>
-    );
-  } else { 
-    dropdownContent = (
-      <>
-        <li> user?.email </li>
-        <li> user?.username </li>
-      </>
-    );
-
-  }
 
   return (
     <>
