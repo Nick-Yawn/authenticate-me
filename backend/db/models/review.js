@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     body: DataTypes.STRING,
     rating: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
       validate: {
         isBetweenZeroAndFive(value){
           if( value > 5 || value < 0 ){
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
   });
   Review.associate = function(models) {
-    Review.belongsTo(models.User, {foreignKey: 'user_id'};
+    Review.belongsTo(models.User, {foreignKey: 'user_id'});
     Review.belongsTo(models.Spot, {foreignKey: 'spot_id'});
   };
   return Review;
