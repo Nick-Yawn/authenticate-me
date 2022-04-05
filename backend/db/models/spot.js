@@ -21,9 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     Spot.belongsTo(models.District, {
       foreignKey: 'district_id'
     });
+/*
     Spot.hasMany(models.Image, {
       foreignKey: 'spot_id'
     });
+*/
     Spot.belongsToMany(models.Amenity, {
       through: 'spot_amenities',
       otherKey: 'amenity_id',
@@ -36,14 +38,16 @@ module.exports = (sequelize, DataTypes) => {
       through: 'favorites',
       otherKey: 'user_id',
       foreignKey: 'spot_id',
-      as: 'Favorites'
+      as: 'Favorites'// this is users that have favorited this spot. not used, though
     });
+/*
     Spot.hasMany(models.Review, {
       foreignKey: 'spot_id'
     }) 
     Spot.hasMany(models.Booking, {
       foreignKey: 'spot_id'
     })
+*/
   };
   return Spot;
 };
