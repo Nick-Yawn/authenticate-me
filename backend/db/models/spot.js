@@ -36,16 +36,14 @@ module.exports = (sequelize, DataTypes) => {
       through: 'favorites',
       otherKey: 'user_id',
       foreignKey: 'spot_id',
-      as: 'Favorites'// this is users that have favorited this spot. not used, though
+      as: 'Favorites'// this is users that have favorited this spot. Will not be used, though
     });
-/*
     Spot.hasMany(models.Review, {
       foreignKey: 'spot_id'
     }) 
     Spot.hasMany(models.Booking, {
       foreignKey: 'spot_id'
     })
-*/
   };
   return Spot;
 };

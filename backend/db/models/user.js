@@ -89,6 +89,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function(models) {
     User.hasMany(models.Spot, { foreignKey: 'user_id' });
     User.hasMany(models.Review, { foreignKey: 'user_id' });
+    User.hasMany(models.Booking, { foreignKey: 'user_id' });
     User.belongsToMany(models.Spot, {
       through: 'favorites',
       otherKey: 'spot_id',
