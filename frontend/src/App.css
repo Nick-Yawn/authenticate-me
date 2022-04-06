@@ -12,6 +12,7 @@ html {
   --main-element-color: rgba(0,0,0,.5);
   --main-background-color: white;
   --main-font-color: rgba(0,0,0,.5); 
+  --main-border-color: rgba(0,0,0,.1);
 }
 
 
