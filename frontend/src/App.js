@@ -5,6 +5,7 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import Home from './components/Home';
 import { getSessionUser } from './store/session';
 
 
@@ -23,6 +24,9 @@ function App() {
     <>
       <Navigation isLoaded={isLoaded} />
       <Switch>
+        <Route exact path ='/'>
+          <Home />
+        </Route>
         <Route path='/login'>
           <LoginFormPage />
         </Route>
