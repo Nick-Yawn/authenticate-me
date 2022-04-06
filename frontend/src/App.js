@@ -4,7 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import { getSessionUser } from './store/session';
+
 
 require('./App.css');
 
@@ -28,7 +30,7 @@ function App() {
           <SignupFormPage />
         </Route>
       </Switch>
-      <div className="footer" />
+      <Footer />
     </>
   );
 }
