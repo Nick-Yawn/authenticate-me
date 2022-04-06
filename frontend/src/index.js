@@ -8,6 +8,7 @@ import configureStore from './store';
 
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
+import * as spotActions from './store/spots'
 import * as sessionActions from './store/session'
 
 const store = configureStore();
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
 
   window.csrfFetch = csrfFetch;
   window.store = store;
+  window.spotActions = spotActions;
   window.sessionActions = sessionActions;
 }
 

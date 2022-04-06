@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
-import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import SpotsPage from './components/SpotsPage';
 import { getSessionUser } from './store/session';
 
 
@@ -27,11 +26,11 @@ function App() {
         <Route exact path ='/'>
           <Home />
         </Route>
-        <Route path='/login'>
-          <LoginFormPage />
+        <Route path='/spots'>
+          <SpotsPage />
         </Route>
-        <Route path='/signup'>
-          <SignupFormPage />
+        <Route path='/favorites'>
+        {/*  <FavoritesPage /> */}
         </Route>
       </Switch>
       <Footer />
