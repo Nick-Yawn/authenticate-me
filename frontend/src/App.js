@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import SpotsPage from './components/SpotsPage';
+import SpotPage from './components/SpotPage';
 import { getSessionUser } from './store/session';
 
 
@@ -26,8 +27,11 @@ function App() {
         <Route exact path ='/'>
           <Home />
         </Route>
-        <Route path='/spots'>
+        <Route exact path='/spots'>
           <SpotsPage />
+        </Route>
+        <Route exact path='/spots/:id'>
+          <SpotPage />
         </Route>
         <Route path='/favorites'>
         {/*  <FavoritesPage /> */}

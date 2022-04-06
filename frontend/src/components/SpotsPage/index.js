@@ -1,28 +1,21 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSpots } from '../../store/spots'
+import { getSpots } from '../../store/spots'
+import SpotCard from './SpotCard';
 
 export default function SpotsPage() {
   const dispatch = useDispatch();  
   const spots = useSelector( state => state.spots )
   
   useEffect(() => {
-    dispatch(setSpots());
+    dispatch(getSpots());
   }, [dispatch]) 
-
-  console.log("spots: ", spots);
 
   return (
     <div className="body-content">
-      {spots && Object.keys(spots).forEach(key => {
-        const spot = spots[key];
-        return (
-          <div key={key}>
-            test
-          </div>
-        )})
-
-      } 
+      {spots && Object.keys(spots).map( key => (
+        <SpotCard spot={spots[key]} key={key} />
+      ))}
     </div>
   )
 }

@@ -1,28 +1,50 @@
 import { csrfFetch } from './csrf.js';
 
-const SET_SPOTS = 'spots/SET';
+const GET_SPOTS = 'spots/GET_SPOTS';
+const GET_SPOT  = 'spots/GET_SPOT';
 
-const setSpotsAction = spots => ({
-  type: SET_SPOTS,
+const getSpotsAction = spots => ({
+  type: GET_SPOTS,
   spots
 })
 
-export const setSpots = () => async dispatch => {
+const getSpotAction = spot => ({
+  type: GET_SPOT,
+  spot
+})
+
+// TODO: update method to use search params
+export const getSpots = () => async dispatch => {
   const response = await fetch('/api/spots');
   const data = await response.json();
 
   if( response.ok ){
-    await dispatch(setSpotsAction(data.spots));
+    await dispatch(getSpotsAction(data.spots));
     return null; 
   } else {
     return data?.errors;
   }
 }
 
+export const getSpot = id => async dispatch => {
+  const response = await fetch(`/api/spots/${id}`);
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(getSpotAction(data.spot))
+  } else {
+    return data?.errors
+  }
+}
+
 export default function spotsReducer(state = null, action) {
+  let newState = {};
   switch(action.type){
-    case SET_SPOTS:
-      return {...action.spots} 
+    case GET_SPOTS:
+      action.spots.forEach( spot => newState[spot.id] = spot)
+      return newState;
+    case GET_SPOT:
+      return {...state, [action.spot.id]: action.spot}
     default:
       return state
   }
