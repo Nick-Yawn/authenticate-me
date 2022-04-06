@@ -2,11 +2,6 @@ html {
   height: 100%;
 }
 
-body {
-  height: 100%;
-  margin: 0px;
-}
-
 #root {
   height: 100%;
   display: flex;
@@ -16,7 +11,17 @@ body {
 
   --main-element-color: rgba(0,0,0,.5);
   --main-background-color: white;
+  --main-font-color: rgba(0,0,0,.5); 
 }
 
 
 
+body {
+  height: 100%;
+  margin: 0px;
+  color: var(--main-font-color);
+}
+
+#root {
+  background-color: var(--main-background-color);
+}  

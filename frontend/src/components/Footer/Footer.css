@@ -1,0 +1,24 @@
+.footer {
+  border-top: 1px solid var(--main-element-color);
+  border-color: var(--main-element-color);
+  width: 100%;
+  color: var(--main-font-color); 
+  background-color: var(--main-background-color); 
+}
+
+.footer-footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 80px;
+  display: flex;
+}
+
+.footer-footer-links {
+  margin-left: auto; 
+}
+
+.footer-footer-links > * {
+  padding: 0px 6px;
+  color: var(--main-font-color);
+}
+
