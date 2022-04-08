@@ -30,11 +30,14 @@ function App() {
         <Route exact path='/spots'>
           <SpotsPage />
         </Route>
-        <Route exact path='/spots/:id'>
-          <SpotPage />
+        <Route path='/my-spots'>
+          <SpotsPage />
         </Route>
         <Route path='/favorites'>
-        {/*  <FavoritesPage /> */}
+          <SpotPage />
+        </Route>
+        <Route exact path='/spots/:id'>
+          <SpotPage />
         </Route>
       </Switch>
       <Footer />

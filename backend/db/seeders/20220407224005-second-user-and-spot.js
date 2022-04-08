@@ -1,5 +1,5 @@
 'use strict';
-const { User, Spot, Image } = require('../models')
+const { User, Spot, Image, Amenity } = require('../models')
 const bcrypt = require('bcryptjs');
 
 
@@ -35,7 +35,7 @@ module.exports = {
     { 
       include: {
         model: Spot,
-        include: Image
+        include: Image 
       }
     });
 

@@ -4,12 +4,14 @@ import { useHistory } from 'react-router-dom';
 import { getAmenities } from '../../store/amenity';
 import { getDistricts } from '../../store/district';
 import { postSpot } from '../../store/spots';
+import { ModalContext } from '../../context/Modal';
 
 import './SpotForm.css'
 
 export default function SpotForm() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { setShowModal } = useContext(ModalContext);
   const user = useSelector(state => state.session?.user);
   const spotToEdit = useSelector(state => state.spotToEdit);
   const amenitiesList = useSelector(state => state.amenities);
@@ -115,20 +117,26 @@ export default function SpotForm() {
     }
   
     if( spotToEdit ) spotToPost.id = spotToEdit.id;
- 
+
+    console.log(spotToPost) 
     // result format is { errors: [], ok: Boolean, id: }
     const result = await dispatch(postSpot(spotToPost)) 
+    console.log(result);
     if( !result.ok ){ 
-      setErrors(result.errors);
+      if( result.errors )
+        setErrors(result.errors)
+      else if( result.message )
+        setErrors([result.message])
     } else {
       history.push(`/spots/${result.id}`)
+      setShowModal(false);
     }
   };
  
   return (
     <form onSubmit={handleSubmit} className="spot-form">
       <ul>
-        {errors.map( (e,i) => <li key={i}>{e}</li> )}
+        {errors && errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>
 
       <label>

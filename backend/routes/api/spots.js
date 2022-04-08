@@ -4,7 +4,7 @@ const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Spot, Image, Amenity, District, Review, Booking, User  } = require('../../db/models')
+const { Spot, Image, Amenity, District, Review, Booking, User, SpotAmenity   } = require('../../db/models')
 
 const router = express.Router();
 
@@ -51,7 +51,7 @@ router.get('/:id', asyncHandler( async (req, res, next) => {
   }
 } ))
 
-router.post('/', requireAuth, asyncHandler( async (req, res, next) => {
+router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
   const { id, name, address, city, state, districtId, price, description, amenities, visible } = req.body; 
  
   if( id ){
@@ -63,11 +63,33 @@ router.post('/', requireAuth, asyncHandler( async (req, res, next) => {
         return next(err);
       } 
       
-      const simpleProps ={name, address, city, state, districtId, price, description, visible}; 
-      for( let prop in simpleProps){
-        spot[prop] = simpleProps[prop];
+      spot.set({name, address, city, state, districtId, price, description, visible});
+    
+      try {
+        await spot.save();
+
+        await SpotAmenity.destroy({ where: {spotId: id}});
+
+        const amenityObjects = amenities.map(a => ({spotId: id, amenityId: a }))
+        
+        await SpotAmenity.bulkCreate(amenityObjects);
+
+        const spotInclusive = await Spot.findByPk(spot.id, {
+          include: [Image, Amenity, District, Review, User, 
+            { 
+              model: Booking,
+              attributes: ['start_date', 'end_date']
+            }]
+          });
+        console.log(spotInclusive);
+
+        res.json({spot: spotInclusive});
+      } catch(e) {
+        const err = new Error("There was a problem saving the spot, or with setting amenities.");
+        err.status = 500;
+        next(err);
       }  
- 
+
     } catch (e) {
       const err = new Error("There was a problem updating the spot.")
       err.status = 500;
@@ -76,6 +98,7 @@ router.post('/', requireAuth, asyncHandler( async (req, res, next) => {
   } else {
     try {
       const spot = await Spot.create({
+        user_id: req.user.id,
         name,
         address,
         city,
@@ -83,17 +106,31 @@ router.post('/', requireAuth, asyncHandler( async (req, res, next) => {
         districtId,
         price,
         description,
-        visible,
-        Amenities: [...amenities],
-      }, {
-        include: Amenity
+        visible
       })
-    } catch (e) {
+      
+      const amenityObjects = amenities.map(a => ({spotId: spot.id, amenityId: a }))
+      
+      await SpotAmenity.bulkCreate(amenityObjects);
+
+      const spotInclusive = await Spot.findByPk(spot.id, {
+        include: [Image, Amenity, District, Review, User, 
+          { 
+            model: Booking,
+            attributes: ['start_date', 'end_date']
+          }]
+        });
+      console.log(spotInclusive) 
+ 
+      return res.json({spot: spotInclusive})  
+    } catch (e) { 
+      console.error(e);
       const err = new Error("There was a problem creating the spot.")
       err.status = 500;
       next(err);
     }
   }
+
 }));
 
 module.exports = router;

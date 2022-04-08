@@ -31,7 +31,7 @@ function ProfileDropdown({ user }){
   }
 
   const redirectToUserSpots = e => {
-    history.push(`/${user.username}/spots`) 
+    history.push(`/my-spots`) 
   }
 
   return (

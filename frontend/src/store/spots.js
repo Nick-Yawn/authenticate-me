@@ -44,12 +44,14 @@ export const postSpot = spotToPost => async dispatch => {
     body: JSON.stringify(spotToPost)
   })
   const data = await response.json();
-  
+  console.log('what')
+  console.log(data); 
+  console.log(data.spot); 
   if( response.ok ){
     await dispatch(getSpotAction(data.spot));
     return { errors: [], ok: true, id: data.spot.id }
   } else {
-    return { errors: data.errors, ok: false, id: null }
+    return { errors: data.errors , ok: false, id: null, message: data.message }
   }
 
 }
