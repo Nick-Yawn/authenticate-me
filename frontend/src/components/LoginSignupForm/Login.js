@@ -34,7 +34,7 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleLogin} className="login-form">
+    <form onSubmit={handleLogin} className="login-form login-signup">
       <ul>
         {errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>

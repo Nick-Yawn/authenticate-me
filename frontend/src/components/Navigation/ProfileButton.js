@@ -26,8 +26,8 @@ function ProfileDropdown({ user }){
 
   }
 
-  const openHostForm = e => {
-    alert('pretend theres a form here')
+  const openModal = e => {
+    setShowModal(true)
   }
 
   const redirectToUserSpots = e => {
@@ -44,7 +44,8 @@ function ProfileDropdown({ user }){
               <li className='dropdown-clickable'
                 onClick={redirectToWishlist}> Wishlist </li>
               <li className='dropdown-clickable'
-                onClick={openHostForm}> Host Your Home </li>
+                onClick={openModal}> Host Your Home </li>
+              {/* only show My Spots if user has spots */}
               {user.Spots?.length > 0 && (
                 <li className='dropdown-clickable'
                   onClick={redirectToUserSpots}> My Spots </li>
@@ -56,9 +57,9 @@ function ProfileDropdown({ user }){
           { !user && (
             <>
               <li className='dropdown-clickable' 
-                onClick={()=>setShowModal(true)}> Login </li>
+                onClick={openModal}> Login </li>
               <li className='dropdown-clickable'
-                onClick={()=>setShowModal(true)}> Sign Up </li>
+                onClick={openModal}> Sign Up </li>
             </>
           )}
           </ul>
@@ -68,7 +69,6 @@ function ProfileDropdown({ user }){
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const { showModal, setShowModal } = useContext(ModalContext);
    
   const openMenu = () => {
     if (!showMenu) setShowMenu(true);
@@ -92,11 +92,6 @@ function ProfileButton({ user }) {
         <i className="fa-solid fa-user"></i>
       </div>
       {showMenu && (<ProfileDropdown user={user} />)}
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginSignupForm />
-        </Modal>
-      )}
     </>
   );
 }

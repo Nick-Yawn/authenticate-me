@@ -23,8 +23,10 @@
 }
 
 #modal-content {
-  height: 620px;
+ /* height: 620px;
   width: 530px;
+  Modal Content should expand to fit its contents
+  */
   border-radius: 8px;
   position: absolute;
   background-color: var(--main-background-color);

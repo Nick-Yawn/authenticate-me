@@ -5,9 +5,9 @@ import './LoginSignupForm.css';
 
 export default function LoginSignupForm() {
   return(
-    <>
+    <div className="login-signup-form">
       <Login />
       <Signup /> 
-    </>
+    </div>
   )
 }

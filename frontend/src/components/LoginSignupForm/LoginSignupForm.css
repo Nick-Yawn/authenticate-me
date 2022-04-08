@@ -1,4 +1,45 @@
-.login-form {
+.login-signup-form {
+  min-height: 620px;
+  width: 530px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;  
+}
+
+
+.signup-form {
+  margin-bottom: 40px;
+}
+
+.login-signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 80px;
+}
+
+.login-signup > label {
+  margin: 6px 0px;
+}
+
+.login-signup > label > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+}
+
+.login-signup > button {
+  width: 100%;
+  padding: 7px;
+  margin-top: 8px;
+  font-family: inherit; 
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+.login-form {
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--main-border-color)
 }

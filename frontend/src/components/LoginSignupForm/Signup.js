@@ -36,7 +36,7 @@ export default function Signup() {
   };
 
   return (
-    <form onSubmit={handleSignup} className="signup-form">
+    <form onSubmit={handleSignup} className="signup-form login-signup">
       <ul>
         {errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>
