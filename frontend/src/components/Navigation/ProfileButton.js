@@ -31,7 +31,7 @@ function ProfileDropdown({ user }){
   }
 
   const redirectToUserSpots = e => {
-    history.push('/bookings') 
+    history.push(`/${user.username}/spots`) 
   }
 
   return (
@@ -45,7 +45,7 @@ function ProfileDropdown({ user }){
                 onClick={redirectToWishlist}> Wishlist </li>
               <li className='dropdown-clickable'
                 onClick={openHostForm}> Host Your Home </li>
-              {user.spots?.length > 0 && (
+              {user.Spots?.length > 0 && (
                 <li className='dropdown-clickable'
                   onClick={redirectToUserSpots}> My Spots </li>
               )}
