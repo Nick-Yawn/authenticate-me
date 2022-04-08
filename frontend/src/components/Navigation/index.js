@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Modal, ModalContext } from '../../context/Modal';
 import ProfileButton from './ProfileButton';
 import LoginSignupForm from '../LoginSignupForm';
+import SpotForm from '../SpotForm';
 import './Navigation.css';
 
 
@@ -26,7 +27,7 @@ function Navigation({ isLoaded }){
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           { !user && (<LoginSignupForm />) }
-          {  user && (<>New Spot Form</>)
+          {  user && (<SpotForm />)
           }
         </Modal>
       )}

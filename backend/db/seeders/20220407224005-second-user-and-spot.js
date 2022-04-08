@@ -20,6 +20,7 @@ module.exports = {
         name: 'Luxe Shanghai Tower Apt',
         description: 'Do not miss these views!',
         price: 750,
+        visible: true,
         Images: [
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/decry-yae-osDk4IkK6SM-unsplash.jpg' },
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/gene-brutty-kbNXEqZ6_Z0-unsplash.jpg' },

@@ -17,26 +17,21 @@ module.exports = {
         type: Sequelize.STRING(100)
       },
       city: {
-        allowNull: false,
         type: Sequelize.STRING(50)
       },
       state: {
         type: Sequelize.STRING(50)
       },
       country: {
-        allowNull: false,
         type: Sequelize.STRING(100)
       },
       name: {
-        allowNull: false,
         type: Sequelize.STRING(255)
       },
       description: {
-        allowNull: false,
         type: Sequelize.TEXT
       },
       price: {
-        allowNull: false,
         type: Sequelize.DECIMAL(12,2)
       },
       user_id: {
@@ -44,6 +39,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'users'},
         onDelete: 'CASCADE'
+      },
+      visible: {
+        allowNull: false,
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
       },
       created_at: {
         allowNull: false,

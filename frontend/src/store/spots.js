@@ -37,6 +37,23 @@ export const getSpot = id => async dispatch => {
   }
 }
 
+export const postSpot = spotToPost => async dispatch => {
+  const response = await csrfFetch('/api/spots',{
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(spotToPost)
+  })
+  const data = await response.json();
+  
+  if( response.ok ){
+    await dispatch(getSpotAction(data.spot));
+    return { errors: [], ok: true, id: data.spot.id }
+  } else {
+    return { errors: data.errors, ok: false, id: null }
+  }
+
+}
+
 export default function spotsReducer(state = null, action) {
   let newState = {};
   switch(action.type){
@@ -46,6 +63,6 @@ export default function spotsReducer(state = null, action) {
     case GET_SPOT:
       return {...state, [action.spot.id]: action.spot}
     default:
-      return state
+      return state;
   }
 }

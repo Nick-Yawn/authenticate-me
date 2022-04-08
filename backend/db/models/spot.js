@@ -9,9 +9,16 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     price: DataTypes.DECIMAL,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    visible: DataTypes.BOOLEAN
   }, {
     underscored: true,
+    validate: {
+      onlyVisibleIfRequiredFieldsExist() {
+        if( this.visible && (!this.name || !this.description || !this.city || !this.country || !this.price) )
+          throw new Error('Name, description, city, country, and price are required to set visibility.')
+      }
+    }
   });
   Spot.associate = function(models) {
     Spot.belongsTo(models.User, { 

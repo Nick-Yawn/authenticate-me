@@ -12,6 +12,7 @@ const router = express.Router();
 router.get('/', asyncHandler( async (req, res, next) => {
   try{
     const spots = await Spot.findAll({
+      where: { visible: true},
       include: [
         {
           model: Image,
@@ -49,5 +50,50 @@ router.get('/:id', asyncHandler( async (req, res, next) => {
     next(err);
   }
 } ))
+
+router.post('/', requireAuth, asyncHandler( async (req, res, next) => {
+  const { id, name, address, city, state, districtId, price, description, amenities, visible } = req.body; 
+ 
+  if( id ){
+    try {
+      const spot = await Spot.findByPk(id);
+      if( spot.userId !== req.user.id ){
+        const err = new Error('Unauthorized edit.')
+        err.status = 403;
+        return next(err);
+      } 
+      
+      const simpleProps ={name, address, city, state, districtId, price, description, visible}; 
+      for( let prop in simpleProps){
+        spot[prop] = simpleProps[prop];
+      }  
+ 
+    } catch (e) {
+      const err = new Error("There was a problem updating the spot.")
+      err.status = 500;
+      next(err);
+    }
+  } else {
+    try {
+      const spot = await Spot.create({
+        name,
+        address,
+        city,
+        state,
+        districtId,
+        price,
+        description,
+        visible,
+        Amenities: [...amenities],
+      }, {
+        include: Amenity
+      })
+    } catch (e) {
+      const err = new Error("There was a problem creating the spot.")
+      err.status = 500;
+      next(err);
+    }
+  }
+}));
 
 module.exports = router;

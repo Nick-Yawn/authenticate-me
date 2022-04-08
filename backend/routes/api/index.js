@@ -2,13 +2,17 @@ const router = require('express').Router();
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.js')
 const { User } = require('../../db/models');
-const sessionRouter = require('./session.js');
-const usersRouter = require('./users.js');
-const spotsRouter = require('./spots.js')
+const sessionRouter = require('./session');
+const usersRouter = require('./users');
+const spotsRouter = require('./spots')
+const amenitiesRouter = require('./amenities');
+const districtsRouter = require('./districts');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
+router.use('/amenities', amenitiesRouter);
+router.use('/districts', districtsRouter);
 
 /* TEST ROUTE
 router.post('/test', (req, res) => {
