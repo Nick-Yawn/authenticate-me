@@ -10,7 +10,7 @@ module.exports = {
     {
       username: 'cheng-feng',
       email: 'cheng-feng@nightcitybnb.com',
-      hashedPassword: bcrypt.hashSync('REDACTED'),
+      hashedPassword: bcrypt.hashSync('cheng-feng-pw'),
       Spots: [{
         district_id: null,
         address: null,
