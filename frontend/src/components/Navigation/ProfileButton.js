@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Modal, ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
+
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
   const history = useHistory();
-  const [showMenu, setShowMenu] = useState(false);
+  const { showModal, setShowModal } = useContext(ModalContext);
+  const [ showMenu, setShowMenu ] = useState(false);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
-
-  const redirectToLogin = e => {
-    history.push('/login') 
-  }
-
-  const redirectToSignUp = e => {
-    history.push('/signup') 
-  }
 
   return (
           <ul className="profile-dropdown">
@@ -35,9 +30,9 @@ function ProfileDropdown({ user }){
           { !user && (
             <>
               <li className='dropdown-clickable' 
-                onClick={redirectToLogin}> Login </li>
+                onClick={()=>setShowModal(true)}> Login </li>
               <li className='dropdown-clickable'
-                onClick={redirectToSignUp}> Sign Up </li>
+                onClick={()=>setShowModal(true)}> Sign Up </li>
             </>
           )}
           </ul>
@@ -47,11 +42,12 @@ function ProfileDropdown({ user }){
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  
+  const { showModal, setShowModal } = useContext(ModalContext);
+   
   const openMenu = () => {
     if (!showMenu) setShowMenu(true);
   };
-  
+ 
   useEffect(() => {
     if (showMenu){
       const closeMenu = () => {
@@ -62,6 +58,7 @@ function ProfileButton({ user }) {
     }
   }, [showMenu]);
 
+
   return (
     <>
       <div onClick={openMenu} className="profile-hamburger">
@@ -69,6 +66,10 @@ function ProfileButton({ user }) {
         <i className="fa-solid fa-user"></i>
       </div>
       {showMenu && (<ProfileDropdown user={user} />)}
+      {showModal && (<Modal onClose={() => setShowModal(false)}>
+        Modal Test
+      </Modal>)
+      }
     </>
   );
 }
