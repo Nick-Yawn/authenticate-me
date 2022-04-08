@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Modal, ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
-
+import LoginSignupForm from '../LoginSignupForm';
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
@@ -17,12 +17,38 @@ function ProfileDropdown({ user }){
     dispatch(sessionActions.logout());
   };
 
+  const redirectToTrips = e => {
+    history.push('/trips') 
+  }
+
+  const redirectToWishlist = e => {
+    history.push('/favorites') 
+
+  }
+
+  const openHostForm = e => {
+    alert('pretend theres a form here')
+  }
+
+  const redirectToUserSpots = e => {
+    history.push('/bookings') 
+  }
+
   return (
           <ul className="profile-dropdown">
           { user && (
             <>
-              <li> {user?.email} </li>
-              <li> {user?.username} </li>
+              <li className='dropdown-user'> {user?.username} </li>
+              <li className='dropdown-clickable'
+                onClick={redirectToTrips}> Trips </li>
+              <li className='dropdown-clickable'
+                onClick={redirectToWishlist}> Wishlist </li>
+              <li className='dropdown-clickable'
+                onClick={openHostForm}> Host Your Home </li>
+              {user.spots?.length > 0 && (
+                <li className='dropdown-clickable'
+                  onClick={redirectToUserSpots}> My Spots </li>
+              )}
               <li className='dropdown-clickable'
                  onClick={logout}> Logout </li>
             </>        
@@ -66,10 +92,11 @@ function ProfileButton({ user }) {
         <i className="fa-solid fa-user"></i>
       </div>
       {showMenu && (<ProfileDropdown user={user} />)}
-      {showModal && (<Modal onClose={() => setShowModal(false)}>
-        Modal Test
-      </Modal>)
-      }
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <LoginSignupForm />
+        </Modal>
+      )}
     </>
   );
 }

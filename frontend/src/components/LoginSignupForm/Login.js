@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSessionUser } from '../../store/session.js' 
 import { Redirect } from 'react-router-dom';
 
-require('./index.css');
+import { ModalContext } from '../../context/Modal';
 
-export default function LoginFormPage() {
+export default function Login() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session?.user);
   const [ credential, setCredential ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState([]);
+  const { setShowModal } = useContext(ModalContext);
 
   if( sessionUser ){
     console.log('Went to render login form, but already logged in')
@@ -29,6 +30,7 @@ export default function LoginFormPage() {
     e.preventDefault();
     const loginErrors = await dispatch(setSessionUser({credential, password}));
     if( loginErrors ) setErrors(loginErrors);
+    else setShowModal(false);
   }
 
   return (
