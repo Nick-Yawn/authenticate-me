@@ -34,7 +34,7 @@ function App() {
           <SpotsPage select={'my-spots'}/>
         </Route>
         <Route path='/favorites'>
-          <SpotPage select={'favorites'}/>
+          <SpotsPage select={'favorites'}/>
         </Route>
         <Route exact path='/spots/:id'>
           <SpotPage />

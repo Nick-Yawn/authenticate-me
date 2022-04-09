@@ -83,10 +83,7 @@ router.get('/favorites', requireAuth, asyncHandler( async (req, res, next) => {
   // THIS DOESN'T WORK YET
   const options = {
       where: { visible: true },
-      include: {
-        model: Image,
-        limit: 1
-      }
+      through: {model: 'favorites'}
   }
  
   let query = req.query.q;
@@ -102,7 +99,8 @@ router.get('/favorites', requireAuth, asyncHandler( async (req, res, next) => {
   
  
   try{
-    const spots = await Spot.findAll(options);
+    const user = await User.findByPk(req.user.id);
+    const spots = await user.getSpots(options);
 
     return res.json({ spots });
   } catch (e) {

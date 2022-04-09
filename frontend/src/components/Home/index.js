@@ -42,7 +42,7 @@ export default function Home() {
           <div className="los-angeles-image city-image" />
           <div className="los-angeles-label city-label">Los Angeles</div>
         </div>
-        <div className="neo-tokyo city-panel" onClick={redirectWithParams("Neo Tokyo")}>
+        <div className="neo-tokyo city-panel" onClick={redirectWithParams("Tokyo")}>
           <div className="neo-tokyo-image city-image" />
           <div className="neo-tokyo-label city-label">Neo Tokyo</div>
         </div>
