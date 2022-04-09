@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
-
+const { Op } = require('sequelize');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Spot, Image, Amenity, District, Review, Booking, User, SpotAmenity   } = require('../../db/models')
@@ -10,15 +10,30 @@ const router = express.Router();
 
 
 router.get('/', asyncHandler( async (req, res, next) => {
-  try{
-    const spots = await Spot.findAll({
-      where: { visible: true},
+  const options = {
+      where: { 
+        visible: true 
+      },
       include: [
         {
           model: Image,
           limit: 1
         }]
-    })
+  }
+
+  let query = req.query.q;
+  if( query ){
+    query += '%'
+    options.where[Op.or] = [
+        { name:         { [Op.iLike]: query }},
+        { city:         { [Op.iLike]: query }},
+        { description:  { [Op.iLike]: query }},
+        { country:      { [Op.iLike]: query }},
+      ] 
+  } 
+
+  try{
+    const spots = await Spot.findAll(options)
 
     return res.json({ spots })
 
@@ -29,6 +44,73 @@ router.get('/', asyncHandler( async (req, res, next) => {
     next(err);
   }
   
+}));
+
+router.get('/my-spots', requireAuth, asyncHandler( async (req, res, next) => {
+  const options = {
+      where: { user_id: req.user.id},
+      include: {
+        model: Image,
+        limit: 1
+      }
+  }
+
+  let query = req.query.q;
+  if( query ){
+    query += '%'
+    options.where[Op.or] = [
+        { name:         { [Op.iLike]: query }},
+        { city:         { [Op.iLike]: query }},
+        { description:  { [Op.iLike]: query }},
+        { country:      { [Op.iLike]: query }},
+      ] 
+  } 
+
+  try{
+    const spots = await Spot.findAll(options);
+
+    return res.json({ spots });
+  } catch (e) {
+    console.log(e);
+    const err = new Error('There was a problem accessing your spots.');
+    err.status = 500;
+    next(err);
+  }
+}));
+
+router.get('/favorites', requireAuth, asyncHandler( async (req, res, next) => {
+
+  // THIS DOESN'T WORK YET
+  const options = {
+      where: { visible: true },
+      include: {
+        model: Image,
+        limit: 1
+      }
+  }
+ 
+  let query = req.query.q;
+  if( query ){
+    query += '%'
+    options.where[Op.or] = [
+        { name:         { [Op.iLike]: query }},
+        { city:         { [Op.iLike]: query }},
+        { description:  { [Op.iLike]: query }},
+        { country:      { [Op.iLike]: query }},
+      ] 
+  } 
+  
+ 
+  try{
+    const spots = await Spot.findAll(options);
+
+    return res.json({ spots });
+  } catch (e) {
+    console.log(e);
+    const err = new Error('There was a problem accessing your spots.');
+    err.status = 500;
+    next(err);
+  }
 }));
 
 router.get('/:id', asyncHandler( async (req, res, next) => {

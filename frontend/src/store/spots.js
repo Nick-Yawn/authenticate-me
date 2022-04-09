@@ -20,8 +20,14 @@ const deleteSpotAction = id => ({
 })
 
 // TODO: update method to use search params
-export const getSpots = () => async dispatch => {
-  const response = await fetch('/api/spots');
+export const getSpots = (selection, search = '' ) => async dispatch => {
+  let response;
+     
+  // tried a switch here and it didn't work. Weird.  
+  if( selection === 'my-spots') response = await csrfFetch('/api/spots/my-spots' + search)
+  else if( selection === 'favorites') response = await csrfFetch('/api/spots/user-favorite-spots' + search)
+  else response = await csrfFetch('/api/spots' + search);
+  
   const data = await response.json();
 
   if( response.ok ){
