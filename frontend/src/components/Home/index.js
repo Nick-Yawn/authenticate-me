@@ -1,16 +1,27 @@
+import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { setSpotToEdit } from '../../store/spotToEdit';
+import { ModalContext } from '../../context/Modal';
 
 import './Home.css';
 
 export default function Home() {
   const history = useHistory();
-  
+  const dispatch = useDispatch();
+  const { setShowModal } = useContext(ModalContext); 
+ 
   const redirectToSpots = e => {
     history.push('/spots')
   } 
 
   const redirectWithParams = params => e => {
     history.push(`/spots?q=${params}`)
+  }
+
+  const openModal = e => {
+    dispatch(setSpotToEdit(null));
+    setShowModal(true)
   }
 
   return (
@@ -37,7 +48,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="hosting-ad">Become a host (to humans)</div>
+      <div onClick={openModal} className="hosting-ad">Become a host (to humans)</div>
 
     </div>
   )

@@ -5,6 +5,7 @@ import { Modal, ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
 import LoginSignupForm from '../LoginSignupForm';
+import { setSpotToEdit } from '../../store/spotToEdit';
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function ProfileDropdown({ user }){
   }
 
   const openModal = e => {
+    dispatch(setSpotToEdit(null));
     setShowModal(true)
   }
 
