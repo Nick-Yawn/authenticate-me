@@ -48,7 +48,19 @@ export default function Home() {
         </div>
       </div>
 
-      <div onClick={openModal} className="hosting-ad">Become a host (to humans)</div>
+      <div onClick={openModal} className="hosting-ad">
+        <div className="host" id="host-1"/>
+        <div className="host" id="host-2"/>
+        <div className="host" id="host-3"/>
+        <div className="host" id="host-4"/>
+        <div className="host" id="host-5"/>
+        <div className="host" id="host-6"/>
+        <div className="host" id="host-7"/>
+        <div className="host" id="host-8"/>
+        <div className="host" id="host-9"/>
+        <div className="host" id="host-10"/>
+        <div className="hosts-label">Become a host (to humans)</div>
+      </div>
 
     </div>
   )
