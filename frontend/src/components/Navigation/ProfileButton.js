@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Modal, ModalContext } from '../../context/Modal';
+import { ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
-import LoginSignupForm from '../LoginSignupForm';
 import { setSpotToEdit } from '../../store/spotToEdit';
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
   const history = useHistory();
-  const { showModal, setShowModal } = useContext(ModalContext);
-  const [ showMenu, setShowMenu ] = useState(false);
+  const { setShowModal } = useContext(ModalContext);
 
   const logout = (e) => {
     e.preventDefault();
@@ -34,6 +32,10 @@ function ProfileDropdown({ user }){
 
   const redirectToUserSpots = e => {
     history.push(`/my-spots`) 
+  }
+
+  const demoUserLogin = e => {
+    dispatch(sessionActions.loginDemoUser());
   }
 
   return (
@@ -62,6 +64,8 @@ function ProfileDropdown({ user }){
                 onClick={openModal}> Login </li>
               <li className='dropdown-clickable'
                 onClick={openModal}> Sign Up </li>
+              <li className='dropdown-clickable'
+                onClick={demoUserLogin}> Login with Demo User </li>
             </>
           )}
           </ul>
