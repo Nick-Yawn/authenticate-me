@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSpots } from '../../store/spots'
 import SpotCard from './SpotCard';
 
+import './SpotsPage.css'
+
 export default function SpotsPage({select}) {
   const dispatch = useDispatch();  
   const { search }  = useLocation();
@@ -14,7 +16,7 @@ export default function SpotsPage({select}) {
   }, [dispatch, select]) 
 
   return (
-    <div className="body-content">
+    <div className="spots-body-content">
       <h1>{ }</h1>
       {spots && Object.keys(spots).map( key => (
         <SpotCard spot={spots[key]} key={key} />

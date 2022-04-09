@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   return (
-    <div className="body-content">
+    <div className="home-body-content">
 
       <div className="impact-image" onClick={redirectToSpots}>RISE ABOVE IT</div>
 

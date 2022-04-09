@@ -12,9 +12,15 @@ export default function SpotCard({ spot }) {
   return (
     <div  className="spot-card" 
           onClick={cardRedirect}
-          style={{ backgroundImage: `url(${imgLink})`}} 
     >
-      {spot.city} 
+      <div className="spot-image"
+          style={{ backgroundImage: `url(${imgLink})`}}
+      />
+      <div className='spot-label'>
+        <div className='spot-label-left'>{spot.city + ', ' + spot.country }</div>
+        <div className='spot-label-right'>{'\u00A4 ' + Math.round(spot.price) + ' night' }</div>
+      </div>
+  
     </div>
   )
 }
