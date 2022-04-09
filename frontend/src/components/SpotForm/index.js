@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getAmenities } from '../../store/amenity';
 import { getDistricts } from '../../store/district';
 import { postSpot } from '../../store/spots';
@@ -12,53 +12,41 @@ export default function SpotForm() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { setShowModal } = useContext(ModalContext);
-  const user = useSelector(state => state.session?.user);
-  const spotToEdit = useSelector(state => state.spotToEdit);
+  const user          = useSelector(state => state.session?.user);
+  const spotToEdit    = useSelector(state => state.spotToEdit);
   const amenitiesList = useSelector(state => state.amenities);
   const districtsList = useSelector(state => state.districts)
-  const [ name, setName] = useState('') // REQ
-  const [ address, setAddress ] = useState('')
-  const [ city, setCity ] = useState('') // REQ
-  const [ state, setState ] = useState('')
-  const [ country, setCountry] = useState('') // REQ
-  const [ description, setDescription ] = useState('') // REQ
-  const [ price, setPrice] = useState( 0 ) // REQ
-  const [ districtId, setDistrictId ] = useState(null)
-  const [ amenities, setAmenities ] = useState([])
-  const [ images, setImages ] = useState([])
-  const [ errors, setErrors ] = useState([]);
-  const [ visible, setVisible ] = useState(false);
+  const [ name, setName ]       = useState(spotToEdit?.name || '') // REQ
+  const [ address, setAddress ] = useState(spotToEdit?.address || '')
+  const [ city, setCity ]       = useState(spotToEdit?.city || '') // REQ
+  const [ state, setState ]     = useState(spotToEdit?.state || '')
+  const [ country, setCountry ] = useState(spotToEdit?.country || '') // REQ
+  const [ description, setDescription ] = useState(spotToEdit?.description || '') // REQ
+  const [ price, setPrice ]             = useState(spotToEdit?.price || 0) // REQ
+  const [ districtId, setDistrictId ]   = useState(spotToEdit?.districtId || null)
+  const [ amenities, setAmenities ]     = useState(spotToEdit?.Amenities?.map(a => a.id) || [])
+  const [ visible, setVisible ]         = useState(spotToEdit?.visible);
+  const [ images, setImages ]   = useState([]);
+  const [ errors, setErrors ]   = useState([]);
   //  TODO: set saved on change of field, prompt before redirect
-  //const [ saved, setSaved ] = useState(true);
 
   // images...
 
-  // Load amenities and districts
-  useEffect(()=>{
+  // Load amenities and districts. Could do this on initial load.
+  useEffect( ()=>{
     dispatch(getAmenities());
     dispatch(getDistricts());
   },[dispatch])
 
 
-  // Ensure cities that are not night city don't get districts 
+  // Ensure cities that aren't night city don't get districts 
   useEffect(()=>{
     if( districtId && city !== "Night City" ){
       setDistrictId(null);
     }
   },[city]);
-
-  // load spot into controlled inputs
-  if(spotToEdit){
-    setName(spotToEdit?.name);
-    setAddress(spotToEdit?.address);
-    setCity(spotToEdit?.city);
-    setState(spotToEdit?.state);
-    setCountry(spotToEdit?.country);
-    setDescription(spotToEdit?.description);
-    setPrice(spotToEdit?.price);
-    setDistrictId(spotToEdit?.districtId);
-    setAmenities(spotToEdit?.Amenities);
-  }
+  
+  console.log(amenities);
   
   // event handlers 
   const updateName        = e => setName(       e.target.value);
@@ -109,6 +97,7 @@ export default function SpotForm() {
       address,
       city,
       state,
+      country,
       districtId,
       price,
       description,
@@ -118,7 +107,6 @@ export default function SpotForm() {
   
     if( spotToEdit ) spotToPost.id = spotToEdit.id;
 
-    console.log(spotToPost) 
     // result format is { errors: [], ok: Boolean, id: }
     const result = await dispatch(postSpot(spotToPost)) 
     console.log(result);
@@ -132,7 +120,7 @@ export default function SpotForm() {
       setShowModal(false);
     }
   };
- 
+
   return (
     <form onSubmit={handleSubmit} className="spot-form">
       <ul>

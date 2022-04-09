@@ -52,18 +52,18 @@ router.get('/:id', asyncHandler( async (req, res, next) => {
 } ))
 
 router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
-  const { id, name, address, city, state, districtId, price, description, amenities, visible } = req.body; 
+  const { id, name, address, city, state, country, districtId, price, description, amenities, visible } = req.body; 
  
   if( id ){
     try {
       const spot = await Spot.findByPk(id);
-      if( spot.userId !== req.user.id ){
+      if( +spot.user_id !== +req.user.id ){
         const err = new Error('Unauthorized edit.')
         err.status = 403;
         return next(err);
       } 
       
-      spot.set({name, address, city, state, districtId, price, description, visible});
+      spot.set({name, address, city, state, country, districtId, price, description, visible});
     
       try {
         await spot.save();
@@ -103,6 +103,7 @@ router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
         address,
         city,
         state,
+        country,
         districtId,
         price,
         description,

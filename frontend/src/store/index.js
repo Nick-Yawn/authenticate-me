@@ -5,12 +5,14 @@ import sessionUserReducer from './session';
 import spotsReducer from './spots';
 import amenitiesReducer from './amenity'
 import districtsReducer from './district';
+import spotToEditReducer from './spotToEdit';
 
 const rootReducer = combineReducers({
   session: sessionUserReducer,
   spots: spotsReducer,
   amenities: amenitiesReducer,
-  districts: districtsReducer
+  districts: districtsReducer,
+  spotToEdit: spotToEditReducer
 });
 
 let enhancer;
