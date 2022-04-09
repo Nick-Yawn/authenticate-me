@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.spot-card:hover {
+  cursor: pointer;  
+}
+
 .spot-image {
   height: 364px;
   border-radius: 12px;

@@ -12,11 +12,11 @@ const router = express.Router();
 router.get('/', restoreUser, asyncHandler( async (req, res) => {
   let { user } = req;
   if( user ){
-    user = await User.findByPk(+user.id, {
-      include: { model: Spot, attributes: ['id'] }
-    }) 
- 
-    return res.json({ user: user.toSafeObject() })
+    const dbuser = await User.findByPk(+user.id); 
+     
+    const userSpots = await Spot.findAll({ where: {user_id: user.id}, attributes: ['id']})
+    dbuser.Spots = userSpots;
+    return res.json({ user: dbuser.toSafeObject() })
   } else {
     return res.json({});
   }
@@ -47,10 +47,12 @@ router.post('/', validateLogin, asyncHandler( async (req, res, next) => {
     err.errors = ['The provided credentials were invalid'];
     return next(err);
   }
-   const user = await User.findByPk(userId, {
-      include: { model: Spot, attributes: ['id'] }
-    }) 
+  
+  const user = await User.findByPk(userId);
 
+  const userSpots = await Spot.findAll({ where: {user_id: user.id}, attributes: ['id']})
+
+  user.Spots = userSpots;
   await setTokenCookie(res, user);
   
   return res.json({ user: user.toSafeObject() })
