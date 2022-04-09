@@ -52,16 +52,20 @@ router.post('/', validateLogin, asyncHandler( async (req, res, next) => {
 
   const userSpots = await Spot.findAll({ where: {user_id: user.id}, attributes: ['id']});
 
-  user.Spots = userSpots;
   await setTokenCookie(res, user);
   
+  user.Spots = userSpots;
   return res.json({ user: user.toSafeObject() })
 }));
 
 router.get('/demo-user', asyncHandler( async (req, res, next) => {
   try {
     const user = await User.findOne({where: {username: 'Demo-lition'}});
+    const userSpots = await Spot.findAll({ where: {user_id: user.id}, attributes: ['id']});
+
     await setTokenCookie(res, user);
+
+    user.Spots = userSpots;
     return res.json({ user: user.toSafeObject() })
   } catch (e) {
     console.log(e);
