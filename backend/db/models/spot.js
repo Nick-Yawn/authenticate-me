@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     visible: DataTypes.BOOLEAN
   }, {
     underscored: true,
+    paranoid: true
   });
   Spot.associate = function(models) {
     Spot.belongsTo(models.User, { 

@@ -51,6 +51,20 @@ router.get('/:id', asyncHandler( async (req, res, next) => {
   }
 } ))
 
+router.delete('/:id', requireAuth, asyncHandler( async (req, res, next) => {
+  const id = req.params.id;
+ 
+  try {
+    await Spot.destroy({ where: { id: +id, user_id: +req.user.id } });
+    return res.json({}) 
+  } catch (e) {
+    console.log(e);
+    const err = new Error('Deletion failed.')
+    err.status = 500;
+    next(err);
+  }
+}));
+
 router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
   const { id, name, address, city, state, country, districtId, price, description, amenities, visible } = req.body; 
  
@@ -85,12 +99,14 @@ router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
 
         res.json({spot: spotInclusive});
       } catch(e) {
+        console.log(e);
         const err = new Error("There was a problem saving the spot, or with setting amenities.");
         err.status = 500;
         next(err);
       }  
 
     } catch (e) {
+      console.log(e);
       const err = new Error("There was a problem updating the spot.")
       err.status = 500;
       next(err);

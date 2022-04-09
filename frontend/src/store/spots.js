@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf.js';
 
 const GET_SPOTS = 'spots/GET_SPOTS';
 const GET_SPOT  = 'spots/GET_SPOT';
+const DELETE_SPOT = 'spots/DELETE_SPOT'
 
 const getSpotsAction = spots => ({
   type: GET_SPOTS,
@@ -11,6 +12,11 @@ const getSpotsAction = spots => ({
 const getSpotAction = spot => ({
   type: GET_SPOT,
   spot
+})
+
+const deleteSpotAction = id => ({
+  type: DELETE_SPOT,
+  id
 })
 
 // TODO: update method to use search params
@@ -51,7 +57,23 @@ export const postSpot = spotToPost => async dispatch => {
   } else {
     return { errors: data.errors , ok: false, id: null, message: data.message }
   }
+}
 
+export const deleteSpot = id => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${id}`, {
+    method: 'DELETE'
+  });
+  const data = await response.json();
+
+  console.log(data)
+
+  if( response.ok ){
+    await dispatch(deleteSpotAction(id));
+    return true;
+  } else {
+    return false;
+  }
+  
 }
 
 export default function spotsReducer(state = null, action) {
@@ -62,6 +84,9 @@ export default function spotsReducer(state = null, action) {
       return newState;
     case GET_SPOT:
       return {...state, [action.spot.id]: action.spot}
+    case DELETE_SPOT:
+      delete state[action.id];  
+      return {...state};
     default:
       return state;
   }
