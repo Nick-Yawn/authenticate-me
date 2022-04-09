@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
-import SignupFormPage from './components/SignupFormPage';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import SpotsPage from './components/SpotsPage';
+import SpotPage from './components/SpotPage';
 import { getSessionUser } from './store/session';
 
 
@@ -27,11 +27,17 @@ function App() {
         <Route exact path ='/'>
           <Home />
         </Route>
-        <Route path='/login'>
-          <LoginFormPage />
+        <Route exact path='/spots'>
+          <SpotsPage />
         </Route>
-        <Route path='/signup'>
-          <SignupFormPage />
+        <Route path='/my-spots'>
+          <SpotsPage />
+        </Route>
+        <Route path='/favorites'>
+          <SpotPage />
+        </Route>
+        <Route exact path='/spots/:id'>
+          <SpotPage />
         </Route>
       </Switch>
       <Footer />

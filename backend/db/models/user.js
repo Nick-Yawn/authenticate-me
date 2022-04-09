@@ -1,6 +1,7 @@
 'use strict';
 const { Validator } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const { Spot } = require('../models')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -49,8 +50,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.prototype.toSafeObject = function() {
-    const { id, username, email } = this;
-    return { id, username, email };
+    const { id, username, email, Spots } = this;
+    return { id, username, email, Spots };
   };
 
   User.prototype.validatePassword = function( password ){
@@ -72,7 +73,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
     if( user && user.validatePassword(password) ){
-      return await User.scope('currentUser').findByPk(user.id);
+      return user.id;
+    } else {
+      return null;
     }
   };
 

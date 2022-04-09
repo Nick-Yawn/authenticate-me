@@ -1,0 +1,9 @@
+.spot-card {
+  height: 364px;
+  width: 364px;
+  border: 1px solid black;
+  border-radius: 12px;
+ 
+  background-color: black;
+  background-size: cover; 
+}

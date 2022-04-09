@@ -4,11 +4,12 @@
   width: 100%; 
   justify-content: space-between;
   align-items: center;
-  height: 80px;
   box-sizing: border-box;
   padding: 0px 80px;
   border-bottom: 2px solid var(--main-border-color);
   background-color: var(--main-background-color);
+  height: 80px;
+  min-height: 80px;
 }
 
 .nav-bar-links {

@@ -9,9 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     price: DataTypes.DECIMAL,
-    user_id: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER,
+    visible: DataTypes.BOOLEAN
   }, {
     underscored: true,
+    paranoid: true
   });
   Spot.associate = function(models) {
     Spot.belongsTo(models.User, { 

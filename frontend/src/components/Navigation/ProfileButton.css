@@ -1,9 +1,13 @@
-
+li {
+  list-style-type: none;
+  margin: 8px;
+}
 
 .profile-dropdown {
-  position: absolute;  
+  position: absolute;
+  padding: 16px;  
   background-color: var(--main-background-color);
-  width: 180px;
+  width: 240px;
   right: 50px;
   border-radius: 9px;
   border: 1px solid var(--main-element-color);
@@ -15,4 +19,8 @@
 
 .dropdown-clickable:hover{
   cursor: pointer;
+}
+
+.dropdown-user {
+  font-weight: bold; 
 }

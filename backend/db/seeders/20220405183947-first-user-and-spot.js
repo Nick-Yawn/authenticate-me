@@ -10,7 +10,7 @@ module.exports = {
     {
       username: 'cheng-feng',
       email: 'cheng-feng@nightcitybnb.com',
-      hashedPassword: bcrypt.hashSync('REDACTED'),
+      hashedPassword: bcrypt.hashSync('cheng-feng-pw'),
       Spots: [{
         district_id: null,
         address: null,
@@ -20,6 +20,7 @@ module.exports = {
         name: 'Cozy apartment in quiet neighborhood',
         description: 'Check it out!',
         price: 99.99,
+        visible: true,
         Images: [
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/cheng-feng-4pTY4ty7jXM-unsplash.jpg' },
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/cheng-feng-eCSbqFCnlmw-unsplash.jpg' },

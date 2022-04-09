@@ -7,15 +7,16 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;  
-
+  align-items: center;   
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  
   --main-element-color: rgba(0,0,0,.5);
   --main-background-color: white;
   --main-font-color: rgba(0,0,0,.5); 
   --main-border-color: rgba(0,0,0,.1);
+  --section-border-color: rgba(0,0,0,.3);
 }
-
-
 
 body {
   height: 100%;

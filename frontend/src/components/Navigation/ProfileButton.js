@@ -1,33 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Modal, ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
+import LoginSignupForm from '../LoginSignupForm';
+import { setSpotToEdit } from '../../store/spotToEdit';
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
   const history = useHistory();
-  const [showMenu, setShowMenu] = useState(false);
+  const { showModal, setShowModal } = useContext(ModalContext);
+  const [ showMenu, setShowMenu ] = useState(false);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
 
-  const redirectToLogin = e => {
-    history.push('/login') 
+  const redirectToTrips = e => {
+    history.push('/trips') 
   }
 
-  const redirectToSignUp = e => {
-    history.push('/signup') 
+  const redirectToWishlist = e => {
+    history.push('/favorites') 
+
+  }
+
+  const openModal = e => {
+    dispatch(setSpotToEdit(null));
+    setShowModal(true)
+  }
+
+  const redirectToUserSpots = e => {
+    history.push(`/my-spots`) 
   }
 
   return (
           <ul className="profile-dropdown">
           { user && (
             <>
-              <li> {user?.email} </li>
-              <li> {user?.username} </li>
+              <li className='dropdown-user'> {user?.username} </li>
+              <li className='dropdown-clickable'
+                onClick={redirectToTrips}> Trips </li>
+              <li className='dropdown-clickable'
+                onClick={redirectToWishlist}> Wishlist </li>
+              <li className='dropdown-clickable'
+                onClick={openModal}> Host Your Home </li>
+              {/* only show My Spots if user has spots */}
+              {user.Spots?.length > 0 && (
+                <li className='dropdown-clickable'
+                  onClick={redirectToUserSpots}> My Spots </li>
+              )}
               <li className='dropdown-clickable'
                  onClick={logout}> Logout </li>
             </>        
@@ -35,9 +59,9 @@ function ProfileDropdown({ user }){
           { !user && (
             <>
               <li className='dropdown-clickable' 
-                onClick={redirectToLogin}> Login </li>
+                onClick={openModal}> Login </li>
               <li className='dropdown-clickable'
-                onClick={redirectToSignUp}> Sign Up </li>
+                onClick={openModal}> Sign Up </li>
             </>
           )}
           </ul>
@@ -47,11 +71,11 @@ function ProfileDropdown({ user }){
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  
+   
   const openMenu = () => {
     if (!showMenu) setShowMenu(true);
   };
-  
+ 
   useEffect(() => {
     if (showMenu){
       const closeMenu = () => {
@@ -61,6 +85,7 @@ function ProfileButton({ user }) {
       return () => document.removeEventListener("click", closeMenu);
     }
   }, [showMenu]);
+
 
   return (
     <>

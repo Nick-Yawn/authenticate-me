@@ -26,13 +26,12 @@ export const setSessionUser = credentials => async dispatch => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(credentials) // { credential, password }
   });
+  const data = await response.json();
 
   if( response.ok ){
-    const data = await response.json();
     dispatch(set(data.user))
     return null;
   } else {
-    const data = await response.json();
     return data?.errors;
   }
 

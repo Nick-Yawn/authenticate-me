@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../../store/session.js' 
 import { Redirect } from 'react-router-dom';
 
+import { ModalContext } from '../../context/Modal';
 
-export default function SignupFormPage() {
+export default function Signup() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session?.user);
   const [ username, setUsername ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState([]);
+  const { setShowModal } = useContext(ModalContext);
  
   if( sessionUser ){
     console.log('Went to render signup form, but already logged in')
@@ -30,10 +32,11 @@ export default function SignupFormPage() {
     e.preventDefault();
     const signupErrors = await dispatch(signup({username, email, password}));
     if( signupErrors ) setErrors(signupErrors);
+    else setShowModal(false);
   };
 
   return (
-    <form onSubmit={handleSignup} className="signup-form">
+    <form onSubmit={handleSignup} className="signup-form login-signup">
       <ul>
         {errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>

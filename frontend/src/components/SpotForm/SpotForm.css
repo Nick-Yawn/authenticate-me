@@ -1,0 +1,77 @@
+.spot-form {
+  display: flex;
+  flex-direction: column;
+  padding: 48px;
+}
+
+.spot-form > label {
+  padding-top: 12px;
+}
+
+.spot-form > label > input {
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+  border-radius: 5px; 
+  font-family: inherit;
+}
+
+.spot-form > label > select {
+  width: 100%;
+  padding: 6px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.spot-form > label > textarea {
+  width: 100%;
+  border-radius: 5px;
+  min-width: 328px;
+  min-height: 67px;
+  display: block;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.amenity-label > i {
+  padding: 0px 6px;
+}
+
+.amenities-label {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.amenities-list {
+  border-radius: 6px;
+  display: flex;
+  overflow-y: scroll;
+  border: 1px solid var(--section-border-color);
+  flex-direction: column;
+}
+
+#visible-checkbox {
+  width: auto;
+  display: inline-block;
+  margin-bottom: 12px;
+  margin-right: 6px;
+}
+
+.visible-label {
+  font-weight: bold;
+}
+
+.spot-form > button {
+  width: 100%;
+  padding: 7px;
+  margin-top: 8px;
+  font-family: inherit; 
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+
+
