@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getAmenities } from '../../store/amenity';
 import { getDistricts } from '../../store/district';
+import { getSessionUser } from '../../store/session';
 import { postSpot } from '../../store/spots';
 import { ModalContext } from '../../context/Modal';
 
@@ -116,6 +117,7 @@ export default function SpotForm() {
       else if( result.message )
         setErrors([result.message])
     } else {
+      dispatch(getSessionUser());
       history.push(`/spots/${result.id}`)
       setShowModal(false);
     }

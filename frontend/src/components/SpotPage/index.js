@@ -2,6 +2,7 @@ import { useParams, Prompt, useHistory } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
+import { getSessionUser } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
 
@@ -24,8 +25,12 @@ export default function SpotPage() {
 
   const deleteButtonFunc = async e => {
     const success = await dispatch(deleteSpot(id));
-    if( success ) history.push('/my-spots')
-    else alert('Unable to delete spot. Please try again later.')
+    if( success ){ 
+      dispatch(getSessionUser());    
+      history.push('/my-spots')
+    } else { 
+      alert('Unable to delete spot. Please try again later.')
+    }
   } 
 
   return(
