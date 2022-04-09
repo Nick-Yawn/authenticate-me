@@ -28,13 +28,13 @@ function App() {
           <Home />
         </Route>
         <Route exact path='/spots'>
-          <SpotsPage />
+          <SpotsPage select={'all'} />
         </Route>
         <Route path='/my-spots'>
-          <SpotsPage />
+          <SpotsPage select={'my-spots'}/>
         </Route>
         <Route path='/favorites'>
-          <SpotPage />
+          <SpotsPage select={'favorites'}/>
         </Route>
         <Route exact path='/spots/:id'>
           <SpotPage />

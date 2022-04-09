@@ -10,6 +10,7 @@
   background-color: var(--main-background-color);
   height: 80px;
   min-height: 80px;
+  color: var(--main-font-color)
 }
 
 .nav-bar-links {
@@ -19,7 +20,7 @@
 
 .profile-hamburger {
   border: 1px solid;
-  border-color: var(--main-element-color);
+  border-color: var(--main-border-color);
   width: 77px; 
   height: 42px;
   display: flex;
@@ -35,5 +36,5 @@
 }
 
 .profile-hamburger > i {
-  color: var(--main-element-color); 
+  color: var(--main-font-color);
 }

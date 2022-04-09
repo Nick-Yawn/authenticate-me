@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { getAmenities } from '../../store/amenity';
 import { getDistricts } from '../../store/district';
+import { getSessionUser } from '../../store/session';
 import { postSpot } from '../../store/spots';
 import { ModalContext } from '../../context/Modal';
 
@@ -28,6 +29,7 @@ export default function SpotForm() {
   const [ visible, setVisible ]         = useState(spotToEdit?.visible);
   const [ images, setImages ]   = useState([]);
   const [ errors, setErrors ]   = useState([]);
+  const [ visibilityErrorExists, setVisibilityErrorExists ]   = useState(true);
   //  TODO: set saved on change of field, prompt before redirect
 
   // images...
@@ -45,8 +47,14 @@ export default function SpotForm() {
       setDistrictId(null);
     }
   },[city]);
-  
-  console.log(amenities);
+
+  // update visibilityErrors array
+  useEffect(()=>{
+    if( !name || !description || !city || !country || !price )
+      setVisibilityErrorExists(true);
+    else
+      setVisibilityErrorExists(false); 
+  },[name, description, city, country, price])
   
   // event handlers 
   const updateName        = e => setName(       e.target.value);
@@ -70,23 +78,7 @@ export default function SpotForm() {
   };
   // visibility checkbox event handler, with error alert
   const updateVisible  = e => {
-    if(visible) setVisible(false)
-    else {
-      let str = 'The following fields must be completed to begin hosting:\n\n';
-      let visibilityErrors = false;
-      if( !name || !description || !city || !country || !price )
-        visibilityErrors = true;
-      if( !name ) str += 'Name\n';
-      if( !description ) str += 'Description\n';
-      if( !city ) str += 'City\n';
-      if( !country ) str += 'Country\n';
-      if( !price ) str += 'Price\n';
-      
-      if( visibilityErrors ) 
-        alert(str) 
-      else
-        setVisible(true);
-    }
+    setVisible(!visible);
   };
 
   // submit
@@ -99,7 +91,7 @@ export default function SpotForm() {
       state,
       country,
       districtId,
-      price,
+      price: typeof price === 'number' ? price : 0,
       description,
       amenities,
       visible
@@ -116,6 +108,7 @@ export default function SpotForm() {
       else if( result.message )
         setErrors([result.message])
     } else {
+      dispatch(getSessionUser());
       history.push(`/spots/${result.id}`)
       setShowModal(false);
     }
@@ -226,10 +219,12 @@ export default function SpotForm() {
         </div>
       </label>
 
-      <label className="visible-label">
+      <label className="visible-label" title={visibilityErrorExists ? "Additional Fields Are Required." : ''} >
         <input
           id="visible-checkbox"
           type="checkbox"
+          title={visibilityErrorExists ? "Additional Fields Are Required." : ''} 
+          disabled={visibilityErrorExists}
           checked={visible}
           onChange={updateVisible}
         />

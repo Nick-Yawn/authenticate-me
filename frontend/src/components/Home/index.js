@@ -25,7 +25,7 @@ export default function Home() {
   }
 
   return (
-    <div className="body-content">
+    <div className="home-body-content">
 
       <div className="impact-image" onClick={redirectToSpots}>RISE ABOVE IT</div>
 
@@ -42,13 +42,25 @@ export default function Home() {
           <div className="los-angeles-image city-image" />
           <div className="los-angeles-label city-label">Los Angeles</div>
         </div>
-        <div className="neo-tokyo city-panel" onClick={redirectWithParams("Neo Tokyo")}>
+        <div className="neo-tokyo city-panel" onClick={redirectWithParams("Tokyo")}>
           <div className="neo-tokyo-image city-image" />
           <div className="neo-tokyo-label city-label">Neo Tokyo</div>
         </div>
       </div>
 
-      <div onClick={openModal} className="hosting-ad">Become a host (to humans)</div>
+      <div onClick={openModal} className="hosting-ad">
+        <div className="host" id="host-1"/>
+        <div className="host" id="host-2"/>
+        <div className="host" id="host-3"/>
+        <div className="host" id="host-4"/>
+        <div className="host" id="host-5"/>
+        <div className="host" id="host-6"/>
+        <div className="host" id="host-7"/>
+        <div className="host" id="host-8"/>
+        <div className="host" id="host-9"/>
+        <div className="host" id="host-10"/>
+        <div className="hosts-label">Become a host (to humans)</div>
+      </div>
 
     </div>
   )

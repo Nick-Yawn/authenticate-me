@@ -96,8 +96,7 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.Spot, {
       through: 'favorites',
       otherKey: 'spot_id',
-      foreignKey: 'user_id',
-      as: 'Favorites'
+      foreignKey: 'user_id'
     });
   };
 

@@ -3,7 +3,7 @@ html {
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,17 +12,18 @@ html {
   font-weight: 500;
   
   --main-element-color: rgba(0,0,0,.5);
-  --main-background-color: white;
-  --main-font-color: rgba(0,0,0,.5); 
-  --main-border-color: rgba(0,0,0,.1);
+  --main-background-color: rgb(17 35 39);
+  --dark-background-color: #091416;
+  --main-font-color: white; 
+  --main-border-color: #6b868f; /* rgba(255,255,255,.1);*/
   --section-border-color: rgba(0,0,0,.3);
 }
 
 body {
-  height: 100%;
   margin: 0px;
   color: var(--main-font-color);
 }
+
 
 #root {
   background-color: var(--main-background-color);

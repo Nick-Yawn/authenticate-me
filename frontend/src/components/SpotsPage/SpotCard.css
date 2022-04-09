@@ -1,9 +1,32 @@
 .spot-card {
+  margin: 12px; 
+  color: var(--main-font-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spot-card:hover {
+  cursor: pointer;  
+}
+
+.spot-image {
   height: 364px;
-  width: 364px;
-  border: 1px solid black;
   border-radius: 12px;
- 
-  background-color: black;
+  border: 1px solid var(--main-border-color);
+  width: 364px;
+  background-position: center;
   background-size: cover; 
+}
+
+.spot-label {
+  height: 36px;
+  font-size: 18px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+  box-sizing: border-box;
 }

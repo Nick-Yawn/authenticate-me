@@ -1,11 +1,12 @@
-.body-content {
+.home-body-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1280px;
+  
 }
 
 .impact-image {
+  box-shadow: 0px 0px 24px 10px rgba(0,0,0,0.3);
   width: 720px;
   height: 1000px;
   color: white;
@@ -25,22 +26,32 @@
   
 }
 
+.impact-image:hover {
+  cursor: pointer;
+}
+
 
 .cities {
   display: flex;
   width: 100%;
+  gap: 24px;
   justify-content: space-between;
 }
 
 .city-panel {
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0,0.2);
   width: 300px;
   height: 450px;
   border-radius: 6px;
-  background-color: black;
+  background-color: var(--dark-background-color);
   color: white;
   font-size: 40px;
   font-family: 'Playfair Display', sans-serif;
   overflow: hidden;
+}
+
+.city-panel:hover {
+  cursor:pointer;
 }
 
 .city-label {
@@ -82,17 +93,82 @@
 }
 
 .hosting-ad {
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0,0.2);
   height: 500px;
   width: 1000px;
   color: white;
   background-color: black;
   border-radius: 6px;
   margin: 80px 0px;
-  display: flex;
-  flex-direction: column; 
-  align-items: end;
-  justify-content: end;
-  padding: 24px;
-  box-sizing: border-box;
-  font-family: 'Playfair Display', sans-serif;
+  display: grid;
+  overflow: hidden;
+
+  grid-template-areas:  "1 2 3 4 5"
+                        "6 7 8 9 10"
+                        "a a a a a";
+  grid-template-rows: 215px 215px  70px
 }
+
+.hosting-ad:hover {
+  cursor: pointer;
+}
+
+.host {
+  background-size: cover;
+}
+
+#host-1 {
+  background-image: 
+url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/ameer-basheer-2r5adxul49E-unsplash.jpg);
+}
+
+#host-2 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/anton-maksimov-5642-su-rr-o3AahhNQ-unsplash.jpg);
+}
+
+#host-8 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/daniel-lincoln-1LYghB1HuRQ-unsplash.jpg);
+}
+
+#host-4 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/donny-jiang-kgtgmExJ4jk-unsplash.jpg);
+}
+
+#host-5 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/donny-jiang-oeZrm_Ea8v4-unsplash.jpg);
+}
+
+#host-6 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/ernest-tarasov-cgMEvBJy3ug-unsplash.jpg);
+}
+
+#host-10 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/guilherme-stecanella-EDHTDETuAo8-unsplash.jpg);
+}
+
+#host-7 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/jack-dong-O6mq_uJnAw0-unsplash.jpg);
+}
+
+#host-9 { 
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/wilmer-martinez-Lme2Ye2jVo8-unsplash.jpg);
+}
+
+#host-3 {
+  background-image: url(https://night-city-bnb-static.s3.us-west-2.amazonaws.com/wilmer-martinez-u9KYV8dPc5U-unsplash.jpg);
+}
+
+.hosts-label {
+  background-color: var(--dark-background-color);
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 24px 8px 0px;
+  font-family: 'Playfair Display', sans-serif;  
+  font-size: 40px;
+  grid-area: a;
+}
+
+
+
