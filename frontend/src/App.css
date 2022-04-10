@@ -17,6 +17,7 @@ html {
   --main-font-color: white; 
   --main-border-color: #6b868f; /* rgba(255,255,255,.1);*/
   --section-border-color: rgba(0,0,0,.3);
+  --highlight-color: rgb(255,56,92);
 }
 
 body {

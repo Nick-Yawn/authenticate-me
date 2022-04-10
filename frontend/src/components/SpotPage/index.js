@@ -80,19 +80,30 @@ export default function SpotPage() {
           </div>
           <div className="mid-right">
             <div className="booking-box">
-              <div className="booking-text">Booking</div>
-              <div className="booking-text">feature</div>
-              <div className="booking-text">coming</div>
-              <div className="booking-text">soon!</div>
+              { spot.user_id !== user?.id && (
+              <>
+                <div className="booking-text">Booking</div>
+                <div className="booking-text">feature</div>
+                <div className="booking-text">coming</div>
+                <div className="booking-text">soon!</div>
+              </>
+              )}
+              { spot.user_id === user?.id && (
+                <>
+                <div className="booking-text controls-header">Manage</div>
+                <div className="booking-text">your</div>
+                <div className="booking-text">spot</div>
+                  <div className="host-info host-controls"> 
+                    <button className="control-button edit-button" onClick={openEditModal}>Edit Spot</button>
+                    <button className="control-button delete-button" onClick={deleteButtonFunc}>Delete Spot</button>
+                  </div>
+                </>  
+              )}
             </div>
           </div>
 
         </div>
         )}
-   
-        { spot?.user_id === user?.id && (<button onClick={openEditModal}>Edit</button>)}
-        { spot?.user_id === user?.id && (<button onClick={deleteButtonFunc}>Delete</button>)}
-        { spot?.user_id !== user?.id && (<button onClick={toggleFavorite}>Favorite</button>)}
       </div>
   )
 }

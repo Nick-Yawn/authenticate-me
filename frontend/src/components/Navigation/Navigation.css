@@ -48,7 +48,7 @@
 
 .logo-text-lower {
   font-size: 15px;
-  color: rgb(255,56,92);
+  color: var(--highlight-color);
   position: relative;
   bottom: 4px;
 }

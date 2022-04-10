@@ -39,7 +39,7 @@ function Navigation({ isLoaded }){
 
       <div className="nav-bar-right nav-bar-section">
         <div className="Search Bar">
-          SEARCH BAR
+          {/*SEARCH BAR*/}
         </div>      
         <div className="Profile Links">
           {isLoaded && (<ProfileButton user={user} />)}

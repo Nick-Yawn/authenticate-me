@@ -73,6 +73,34 @@
   padding-top: 24px;
 }
 
+.host-controls {
+  display: flex;
+  padding: 24px;
+  width: 320px;
+  margin-top: 36px;
+  justify-content: space-around; 
+  align-items: center;
+  border-radius: 16px;
+}
+
+.controls-header {
+  margin-top: 84px;
+}
+
+.control-button {
+  font-family: inherit;
+  color: var(--main-font-color);
+  padding: 6px 12px;
+  width: 110px;
+  border-radius: 6px;
+  border: 1px solid var(--main-border-color);
+  background-color: var(--dark-background-color);
+}
+
+.delete-button {
+  border-color: var(--highlight-color);
+}
+
 .spot-amenity {
   padding: 6px;
 }
