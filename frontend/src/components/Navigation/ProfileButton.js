@@ -43,8 +43,8 @@ function ProfileDropdown({ user }){
           { user && (
             <>
               <li className='dropdown-user'> {user?.username} </li>
-              <li className='dropdown-clickable'
-                onClick={redirectToTrips}> Trips </li>
+              {/*<li className='dropdown-clickable'
+                onClick={redirectToTrips}> Trips </li>*/} 
               <li className='dropdown-clickable'
                 onClick={redirectToWishlist}> Wishlist </li>
               <li className='dropdown-clickable'
