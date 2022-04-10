@@ -1,7 +1,8 @@
 .spots-body-content {
   max-width: 1280px;
-  width: 800px;
+
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row; 
+  flex-direction: row;
+  justify-content: center;
 }

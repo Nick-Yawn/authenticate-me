@@ -33,9 +33,15 @@
 
 .cities {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   gap: 24px;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.sub-cities {
+  display: flex;
+  gap: 24px
 }
 
 .city-panel {

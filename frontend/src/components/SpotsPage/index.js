@@ -23,12 +23,13 @@ export default function SpotsPage({select}) {
   }, [dispatch, select]) 
 
   return (
-    <div className="spots-body-content">
-      <h1>{ }</h1>
+    <>
+      <div className="spots-body-content">
       {spots && stateLoaded && Object.keys(spots).map( key => (
         <SpotCard spot={spots[key]} key={key} />
       ))}
     </div>
+    </>
   )
 }
 
