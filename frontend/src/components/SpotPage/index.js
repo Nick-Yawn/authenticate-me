@@ -33,11 +33,16 @@ export default function SpotPage() {
     }
   } 
 
+  const toggleFavorite = async e => {
+
+  }
+
   return(
     <>
-      {JSON.stringify(spot)}
+       
       { spot?.user_id === user?.id && (<button onClick={openEditModal}>Edit</button>)}
       { spot?.user_id === user?.id && (<button onClick={deleteButtonFunc}>Delete</button>)}
+      { spot?.user_id !== user?.id && (<button onClick={toggleFavorite}>Favorite</button>)}
     </>
   )
 }
