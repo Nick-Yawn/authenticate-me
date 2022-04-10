@@ -9,7 +9,7 @@ export default function Footer() {
           Night City Bed 'n' Breakfast
         </div>
         <div className="footer-footer-links">
-          <a href="https://www.github.com/Nick-Yawn" target="_blank">
+          <a href="https://www.github.com/Nick-Yawn/night-city-bnb" target="_blank">
            <i className="fa-brands fa-github fa-lg"></i>
           </a>
           <a href="https://www.LinkedIn.com/in/nick-yawn" target="_blank">
