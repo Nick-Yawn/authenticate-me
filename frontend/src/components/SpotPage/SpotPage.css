@@ -97,6 +97,10 @@
   background-color: var(--dark-background-color);
 }
 
+.control-button:hover {
+  cursor: pointer;
+}
+
 .delete-button {
   border-color: var(--highlight-color);
 }
