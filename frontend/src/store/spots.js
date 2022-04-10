@@ -76,8 +76,6 @@ export const deleteSpot = id => async dispatch => {
   });
   const data = await response.json();
 
-  console.log(data)
-
   if( response.ok ){
     await dispatch(deleteSpotAction(id));
     return true;
@@ -86,6 +84,23 @@ export const deleteSpot = id => async dispatch => {
   }
   
 }
+
+export const addReview = (spot, body) => async dispatch => {
+  const response = await csrfFetch(`/api/spots/${spot.id}/reviews`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({body})
+  }) 
+  const data = await response.json();
+  
+  if( response.ok ){
+    await dispatch(getSpotAction(data.spot))
+    return {ok: true, reviews: data.spot.Reviews};
+  } else {
+    return {ok: false, errors: data.errors}
+  } 
+
+}  
 
 export default function spotsReducer(state = null, action) {
   let newState = {};

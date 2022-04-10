@@ -69,6 +69,10 @@
   margin: 12px;
 }
 
+.review {
+  margin: 0px 12px;
+}
+
 .host-info {
   padding-top: 24px;
 }
@@ -111,4 +115,8 @@
 
 .spot-amenity > i {
   padding: 0px 6px;
+}
+
+.spot-reviews {
+  color: var(--main-font-color);
 }
