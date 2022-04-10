@@ -1,0 +1,49 @@
+
+.spot-body-content {
+  max-width: 1120px;
+}
+
+.spot-images {
+  width: 1120px;
+  height: 560px;
+  display: grid;
+  gap: 8px;
+  border-radius: 16px;
+  grid-template-areas:  " a a b c "
+                        " a a d e ";
+  background-color: var(--dark-background-color);
+  overflow: hidden;
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0,0.2);
+}
+
+.spot-preview-image {
+  background-size: cover;
+  background-position: center;
+}
+
+#image-1 {
+  grid-area: a;
+}
+
+
+#image-2 {
+  grid-area: b;
+}
+
+
+#image-3 {
+  grid-area: c;
+
+}
+
+
+#image-4 {
+  grid-area: d;
+
+}
+
+
+#image-5 {
+  grid-area: e;
+
+}

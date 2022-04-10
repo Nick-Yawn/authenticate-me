@@ -6,6 +6,8 @@ import { getSessionUser } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
 
+import './SpotPage.css';
+
 export default function SpotPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -37,12 +39,33 @@ export default function SpotPage() {
 
   }
 
+  const previewImages = [];
+  if( spot?.Images ){
+    for( let i = 0 ; i < 5 ; i++ ){
+      if( spot.Images[i] ){
+        previewImages.push( spot.Images[i] )
+      }
+    }
+  }
+
+  console.log(previewImages);
+
   return(
-    <>
-       
-      { spot?.user_id === user?.id && (<button onClick={openEditModal}>Edit</button>)}
-      { spot?.user_id === user?.id && (<button onClick={deleteButtonFunc}>Delete</button>)}
-      { spot?.user_id !== user?.id && (<button onClick={toggleFavorite}>Favorite</button>)}
-    </>
+      <div className="spot-body-content">
+        <div className='spot-images'>
+          { previewImages.map( (img, i)  => (
+          <div
+            key={i}
+            className="spot-preview-image"
+            style={{ backgroundImage: `url(${img.url})` }}
+            id={`image-${i}`}
+          />)) } 
+    
+        </div> 
+   
+        { spot?.user_id === user?.id && (<button onClick={openEditModal}>Edit</button>)}
+        { spot?.user_id === user?.id && (<button onClick={deleteButtonFunc}>Delete</button>)}
+        { spot?.user_id !== user?.id && (<button onClick={toggleFavorite}>Favorite</button>)}
+      </div>
   )
 }
