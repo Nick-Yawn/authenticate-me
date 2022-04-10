@@ -4,6 +4,7 @@
 }
 
 .spot-images {
+  margin-top: 80px;
   width: 1120px;
   height: 560px;
   display: grid;
@@ -33,17 +34,49 @@
 
 #image-3 {
   grid-area: c;
-
 }
 
 
 #image-4 {
   grid-area: d;
-
 }
 
 
 #image-5 {
   grid-area: e;
+}
 
+.mid {
+  color: var(--main-font-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 370px;
+  border: 1px solid var(--main-border-color);
+  border-radius: 16px; 
+  margin-top: 36px; 
+}
+
+.spot-info {
+  padding: 12px;
+  margin: 12px;
+}
+
+.host-info {
+  padding-top: 24px;
+}
+
+.spot-amenity {
+  padding: 6px;
+}
+
+.spot-amenity > i {
+  padding: 0px 6px;
 }

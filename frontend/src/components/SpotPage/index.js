@@ -48,7 +48,6 @@ export default function SpotPage() {
     }
   }
 
-  console.log(previewImages);
 
   return(
       <div className="spot-body-content">
@@ -60,8 +59,36 @@ export default function SpotPage() {
             style={{ backgroundImage: `url(${img.url})` }}
             id={`image-${i}`}
           />)) } 
-    
         </div> 
+      { spot && (
+        <div className="mid">
+          <div className="mid-left">
+            <div className="host-info spot-info">Hosted by: {spot.User?.username}</div>
+            <div className="description spot-info">{spot.description}</div>
+            <div className="amenities spot-info">
+              <div className="spot-amenities-label">Amenities:</div>
+              <div className="spot-amenities-list">
+                { spot?.Amenities && Object.values(spot.Amenities).map( (a, i) => ( 
+                  <div key={i} className="spot-amenity">
+                    <i className={a.iconClass}/>
+                    {a.name}
+                  </div>
+                ))} 
+              </div>
+            </div>
+
+          </div>
+          <div className="mid-right">
+            <div className="booking-box">
+              <div className="booking-text">Booking</div>
+              <div className="booking-text">feature</div>
+              <div className="booking-text">coming</div>
+              <div className="booking-text">soon!</div>
+            </div>
+          </div>
+
+        </div>
+        )}
    
         { spot?.user_id === user?.id && (<button onClick={openEditModal}>Edit</button>)}
         { spot?.user_id === user?.id && (<button onClick={deleteButtonFunc}>Delete</button>)}
