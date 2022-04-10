@@ -1,0 +1,114 @@
+
+.spot-body-content {
+  max-width: 1120px;
+}
+
+.spot-images {
+  margin-top: 80px;
+  width: 1120px;
+  height: 560px;
+  display: grid;
+  gap: 8px;
+  border-radius: 16px;
+  grid-template-areas:  " a a b c "
+                        " a a d e ";
+  background-color: var(--dark-background-color);
+  overflow: hidden;
+  box-shadow: 0px 0px 22px 10px rgba(0,0,0,0.2);
+}
+
+.spot-preview-image {
+  background-size: cover;
+  background-position: center;
+}
+
+#image-1 {
+  grid-area: a;
+}
+
+
+#image-2 {
+  grid-area: b;
+}
+
+
+#image-3 {
+  grid-area: c;
+}
+
+
+#image-4 {
+  grid-area: d;
+}
+
+
+#image-5 {
+  grid-area: e;
+}
+
+.mid {
+  color: var(--main-font-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 370px;
+  border: 1px solid var(--main-border-color);
+  border-radius: 16px; 
+  margin-top: 36px; 
+}
+
+.spot-info {
+  padding: 12px;
+  margin: 12px;
+}
+
+.host-info {
+  padding-top: 24px;
+}
+
+.host-controls {
+  display: flex;
+  padding: 24px;
+  width: 320px;
+  margin-top: 36px;
+  justify-content: space-around; 
+  align-items: center;
+  border-radius: 16px;
+}
+
+.controls-header {
+  margin-top: 84px;
+}
+
+.control-button {
+  font-family: inherit;
+  color: var(--main-font-color);
+  padding: 6px 12px;
+  width: 110px;
+  border-radius: 6px;
+  border: 1px solid var(--main-border-color);
+  background-color: var(--dark-background-color);
+}
+
+.control-button:hover {
+  cursor: pointer;
+}
+
+.delete-button {
+  border-color: var(--highlight-color);
+}
+
+.spot-amenity {
+  padding: 6px;
+}
+
+.spot-amenity > i {
+  padding: 0px 6px;
+}

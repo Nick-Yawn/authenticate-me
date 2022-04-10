@@ -1,21 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Modal, ModalContext } from '../../context/Modal';
+import { ModalContext } from '../../context/Modal';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css' 
-import LoginSignupForm from '../LoginSignupForm';
 import { setSpotToEdit } from '../../store/spotToEdit';
 
 function ProfileDropdown({ user }){
   const dispatch = useDispatch();
   const history = useHistory();
-  const { showModal, setShowModal } = useContext(ModalContext);
-  const [ showMenu, setShowMenu ] = useState(false);
+  const { setShowModal } = useContext(ModalContext);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/');
   };
 
   const redirectToTrips = e => {
@@ -36,13 +35,17 @@ function ProfileDropdown({ user }){
     history.push(`/my-spots`) 
   }
 
+  const demoUserLogin = e => {
+    dispatch(sessionActions.loginDemoUser());
+  }
+
   return (
           <ul className="profile-dropdown">
           { user && (
             <>
               <li className='dropdown-user'> {user?.username} </li>
-              <li className='dropdown-clickable'
-                onClick={redirectToTrips}> Trips </li>
+              {/*<li className='dropdown-clickable'
+                onClick={redirectToTrips}> Trips </li>*/} 
               <li className='dropdown-clickable'
                 onClick={redirectToWishlist}> Wishlist </li>
               <li className='dropdown-clickable'
@@ -62,6 +65,8 @@ function ProfileDropdown({ user }){
                 onClick={openModal}> Login </li>
               <li className='dropdown-clickable'
                 onClick={openModal}> Sign Up </li>
+              <li className='dropdown-clickable'
+                onClick={demoUserLogin}> Login with Demo User </li>
             </>
           )}
           </ul>

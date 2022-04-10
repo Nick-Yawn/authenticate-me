@@ -12,6 +12,7 @@ module.exports = {
       email: 'cheng-feng@nightcitybnb.com',
       hashedPassword: bcrypt.hashSync('cheng-feng-pw'),
       Spots: [{
+        user_id: 4,
         district_id: null,
         address: null,
         city: 'Tokyo',

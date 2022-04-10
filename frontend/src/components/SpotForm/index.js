@@ -50,9 +50,10 @@ export default function SpotForm() {
 
   // update visibilityErrors array
   useEffect(()=>{
-    if( !name || !description || !city || !country || !price )
+    if( !name || !description || !city || !country || !price ){
+      setVisible(false);
       setVisibilityErrorExists(true);
-    else
+    }else
       setVisibilityErrorExists(false); 
   },[name, description, city, country, price])
   
@@ -91,7 +92,7 @@ export default function SpotForm() {
       state,
       country,
       districtId,
-      price: typeof price === 'number' ? price : 0,
+      price: typeof Number(price) === 'number' ? Number(price) : 0,
       description,
       amenities,
       visible

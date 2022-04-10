@@ -12,6 +12,7 @@ module.exports = {
       email: 'qinghong-shen@nightcitybnb.com',
       hashedPassword: bcrypt.hashSync('qinghong-shen-pw'),
       Spots: [{
+        user_id: 5,
         district_id: null,
         address: null,
         city: 'Shanghai',
@@ -23,7 +24,6 @@ module.exports = {
         visible: true,
         Images: [
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/decry-yae-osDk4IkK6SM-unsplash.jpg' },
-          { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/gene-brutty-kbNXEqZ6_Z0-unsplash.jpg' },
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/marc-olivier-jodoin-uqmOB8z9YvM-unsplash.jpg' },
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/mikhail-preobrazhenskiy-x1qooT_pUWY-unsplash.jpg' },
           { url: 'https://night-city-bnb-static.s3.us-west-2.amazonaws.com/qinghong-shen-A71hpMTGZ4I-unsplash.jpg' },
@@ -35,7 +35,7 @@ module.exports = {
     { 
       include: {
         model: Spot,
-        include: Image 
+        include: Image
       }
     });
 

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 export default function SpotCard({ spot }) {
   const history = useHistory();
 
-  const imgLink = spot.Images[0]?.url;
+  const imgLink = spot.Images[0]?.url || '/camera-slash-solid.svg';
   const cardRedirect = e => {
     history.push(`/spots/${spot.id}`)  
   }
