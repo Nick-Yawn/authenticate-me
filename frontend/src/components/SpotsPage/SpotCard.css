@@ -13,7 +13,6 @@
 
 .spot-image {
   height: 364px;
-  border-radius: 12px;
   border: 1px solid var(--main-border-color);
   width: 364px;
   background-position: center;

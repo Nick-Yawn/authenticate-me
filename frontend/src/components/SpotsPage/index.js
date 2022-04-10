@@ -8,7 +8,7 @@ import './SpotsPage.css'
 
 export default function SpotsPage({select}) {
   const dispatch = useDispatch();  
-  const { search }  = useLocation();
+  const { search }  =  useLocation();
   const spots = useSelector( state => state.spots )
   const [ stateLoaded, setStateLoaded ] = useState(false);
 
