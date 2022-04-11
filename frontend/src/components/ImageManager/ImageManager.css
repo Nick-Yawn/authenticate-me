@@ -1,0 +1,33 @@
+.images-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--main-font-color);
+}
+
+.images-modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.images-modal-content {
+  border-radius: 8px;
+  border: 1px solid var(--main-border-color);
+  position: absolute;
+  background-color: var(--main-background-color);
+  max-height: 100%;
+}
+
+.image-manager-button {
+  position: relative;
+  top: 24px;
+}

@@ -8,6 +8,7 @@ const spotsRouter = require('./spots')
 const amenitiesRouter = require('./amenities');
 const districtsRouter = require('./districts');
 const reviewsRouter = require('./reviews');
+const awsRouter = require('./aws')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -15,6 +16,7 @@ router.use('/spots', spotsRouter);
 router.use('/amenities', amenitiesRouter);
 router.use('/districts', districtsRouter);
 router.use('/reviews', reviewsRouter);
+router.use('/aws', awsRouter);
 
 /* TEST ROUTE
 router.post('/test', (req, res) => {

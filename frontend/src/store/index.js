@@ -7,6 +7,7 @@ import amenitiesReducer from './amenity'
 import districtsReducer from './district';
 import spotToEditReducer from './spotToEdit';
 import reviewsReducer from './reviews';
+import imagesReducer from './images';
 
 const rootReducer = combineReducers({
   session: sessionUserReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   amenities: amenitiesReducer,
   districts: districtsReducer,
   spotToEdit: spotToEditReducer,
-  reviews: reviewsReducer
+  reviews: reviewsReducer,
+  images: imagesReducer
 });
 
 let enhancer;

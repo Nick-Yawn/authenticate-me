@@ -279,4 +279,48 @@ router.post('/:id/reviews', requireAuth, asyncHandler( async (req, res, next) =>
 
 } ));
 
+router.post('/:id/images', requireAuth, asyncHandler( async (req, res, next) => {
+  const { url } = req.body;
+  const spotId = req.params.id;
+
+  try {
+    const spot = await Spot.findByPk(+spotId);
+    if( +spot.user_id !== +req.user.id ) {
+      const err = new Error('Unauthorized');
+      err.status = 401;
+      return next(err);
+    }
+  
+    const image = await Image.create({
+      spot_id: +spotId,
+      url
+    });
+
+    return res.json({ image })
+
+  } catch (e) {
+    console.log(e);
+    const err = new Error('There was a problem accessing the database.')
+    err.status = 500;
+    next(err);
+  }
+  
+}));
+
+router.get('/:id/images', asyncHandler( async (req, res, next) => {
+  const spotId = req.params.id;
+  
+  try {
+    const images = await Image.findAll({where: {spot_id: +spotId}});    
+
+    return res.json({images});
+
+  } catch (e) {
+    const err = new Error('There was a problem accessing the database.')
+    err.status = 500;
+    next(err);
+  } 
+
+}));
+
 module.exports = router;
