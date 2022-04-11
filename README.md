@@ -17,10 +17,16 @@ Night City BnB is a Cyberpunk-themed clone of [Airbnb](https://www.airbnb.com/).
 - [git](https://git-scm.com/)
 - and, of course, [vim](https://www.vim.org/)
 
+with hosting on
+- [Heroku](https://heroku.com) (frontend, backend, and database)
+- [AWS S3](https://aws.amazon.com/s3/) (images)
+
 # Features
 
 - Navigate via the Nav Bar, the Profile Dropdown, or the Home page cards.
 - Create, Edit, Host, and Delete Spots
+- Add and remove images from a Spot using the Image Manager
+  -  Images are stored in an AWS S3 bucket. 
 - View, Search, and Favorite Spots hosted by others
 - Leave Reviews for Spots hosted by others
 - View and Search your own spots and favorites
@@ -40,6 +46,8 @@ Night City BnB is a Cyberpunk-themed clone of [Airbnb](https://www.airbnb.com/).
     - `dotenv` may be omitted if regular environment variables are used.
 5. Run `npm start` in both `frontend` and `backend` directories, in separate terminals. A webpage will automatically be opened by React.
 7. Enjoy!
+
+Note that, due to hard-coded join table seed entries, `db:seed:undo` will cause future seeds to break. Fixing this bug is a to-do item. Still, the spot creation tools present in the website are very powerful as-is.
 
 # Database Schema
 
