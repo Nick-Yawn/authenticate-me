@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
 import { updateReviews, deleteReview } from '../../store/reviews';
 import { getSessionUser } from '../../store/session';
-import { ModalContext } from '../../context/Modal';
+import { getImages } from '../../store/images';
 import { setSpotToEdit } from '../../store/spotToEdit';
+import { ModalContext } from '../../context/Modal';
 import ReviewForm from './ReviewForm';
 import Review from './Review';
 import ImageManager from '../ImageManager';
@@ -23,6 +24,7 @@ export default function SpotPage() {
  
   useEffect(()=>{
     dispatch(getSpot(id));
+    dispatch(getImages(id));
   }, [dispatch])
 
   useEffect( ()=> {

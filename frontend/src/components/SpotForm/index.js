@@ -5,6 +5,7 @@ import { getAmenities } from '../../store/amenity';
 import { getDistricts } from '../../store/district';
 import { getSessionUser } from '../../store/session';
 import { postSpot } from '../../store/spots';
+import { getImages } from '../../store/images';
 import { ModalContext } from '../../context/Modal';
 
 import './SpotForm.css'
@@ -111,6 +112,7 @@ export default function SpotForm() {
     } else {
       dispatch(getSessionUser());
       history.push(`/spots/${result.id}`)
+      dispatch(getImages(result.id))
       setShowModal(false);
     }
   };
