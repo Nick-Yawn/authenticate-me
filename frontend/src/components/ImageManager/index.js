@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, getImages } from '../../store/images';
-
+import { getSpot } from '../../store/spots';
 
 import './ImageManager.css'
 
@@ -11,7 +11,6 @@ export default function ImageManager({ spot }){
   const dispatch = useDispatch();
   const [ visible, setVisible ] = useState(false);
   const images = useSelector( state => state.images ); 
-  // will need images state slice
 
   useEffect(()=>{
     if( id ) dispatch(getImages(id));
@@ -51,7 +50,8 @@ export default function ImageManager({ spot }){
         if( imageUrl ){
           const response = await dispatch(addImage(id, imageUrl));
           if( response.ok ){
-            statuses[i] = 'SUCCESS'    
+            statuses[i] = 'SUCCESS'
+            dispatch(getSpot(id)); 
           } else {
             statuses[i] = response.errors
           }
