@@ -7,6 +7,7 @@ import { getSessionUser } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
 import ReviewForm from './ReviewForm';
+import Review from './Review';
 
 import './SpotPage.css';
 
@@ -45,8 +46,7 @@ export default function SpotPage() {
   const toggleFavorite = async e => {};
 
 
-  const dispatchDeleteReview = id => async e => {
-    
+  const dispatchDeleteReview = id => async e => { 
     const success = await dispatch(deleteReview(id));
     if( success ){
       await dispatch(getSpot(spot.id))
@@ -125,22 +125,14 @@ export default function SpotPage() {
             <div className="reviews-label spot-info">Reviews</div>
             <div className="reviews-list">
               { reviews && Object.values(reviews).map( (r, i) => (
-                <div key={i} className="review spot-info">
-                  <div className="review-body">" {r.body} " –{r.User?.username} </div>
-                  { r.User?.id === user?.id && (
-                    <div className="review-buttons">
-                      <button className="control-button edit-button review-button" onClick={null}>Edit</button>                
-                      <button className="control-button delete-button review-button" onClick={dispatchDeleteReview(r.id)}>Delete</button>                
-                    </div>
-                  )}
-                </div>
+                <Review key={i} review={r} spot={spot} user={user} />
               )) }
               { reviews && Object.values(reviews).length === 0 && (<div className="spot-info">No Reviews Yet!</div>) }
             </div>    
           </div>
         )}
         { spot && user && spot.user_id !== user.id && (
-          <ReviewForm spot={spot} />
+          <ReviewForm spot={spot} review={null} />
         )}
       </div>
   )

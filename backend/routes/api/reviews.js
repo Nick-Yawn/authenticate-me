@@ -28,8 +28,29 @@ router.delete('/:id', requireAuth, asyncHandler( async (req, res, next) => {
     next(err);
   }
 
+}));
 
+router.put('/:id', requireAuth, asyncHandler( async (req, res, next) => {
+  try {
+    const review = await Review.findByPk(+req.params.id);
 
+    if( review.user_id === +req.user.id ){
+      review.body = req.body.body // yikes
+      await review.save();
+
+      res.json(review)
+    } else {
+      const err = new Error('Edit unauthorized')
+      err.status = 401;
+      next(err);
+    }
+
+  } catch (e) {
+    console.log(e);
+    const err = new Error('There was a problem accessing the database.')
+    err.status = 500;
+    next(err);
+  }
 }));
 
 module.exports = router;
