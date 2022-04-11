@@ -40,12 +40,10 @@ export default function ImageManager({ spot }){
       const file = files[i]
       const response1 = await fetch(`/api/aws/sign-s3?file-name=${file.name}&file-type=${file.type}`);
       const data = await response1.json(); 
-      console.log('data', data);
   
       if( response1.ok ){
           
         const imageUrl = await uploadFile(file, data.signedRequest, data.url) 
-        console.log(imageUrl);
          
         if( imageUrl ){
           const response = await dispatch(addImage(id, imageUrl));
@@ -66,7 +64,6 @@ export default function ImageManager({ spot }){
       
     }
     
-    console.log(statuses); 
   }
 
   const getDeleteHandler = (imgId, spotId) => async e => {
