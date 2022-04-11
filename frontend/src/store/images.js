@@ -15,7 +15,7 @@ const addImageAction = image => ({
 
 export const getImages = (id) => async dispatch => {
   const response = await csrfFetch(`/api/spots/${id}/images`);
-  const data = response.json();
+  const data = await response.json();
 
   if( response.ok ){
     dispatch(getImagesAction(data.images));
