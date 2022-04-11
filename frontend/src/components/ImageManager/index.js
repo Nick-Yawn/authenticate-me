@@ -76,7 +76,17 @@ export default function ImageManager({ spot }){
         <div className="images-modal">
           <div className="images-modal-background" onClick={closeImageManager} />
           <div className="images-modal-content">
-            <input type="file" multiple accept=".png,.jpg,.jpeg" onChange={handleFiles}/>
+            <div className="images-modal-list">
+            { images && Object.values(images).map( (img, i) => (
+              <div key={i} className="image-manager-image">
+                <i class="fa-solid fa-xmark-large" onClick={null}/>
+                <div className='img-thumbnail' style={{backgroundImage: `url(${img.url})`}} />
+                {img.url.slice(47)}
+              </div>
+            ))}
+            </div>
+            <input type="file" id="img-input" name="img-input"  multiple accept=".png,.jpg,.jpeg" onChange={handleFiles}/>
+            <label for="img-input" className="img-input-label">Select Images</label>
           </div>
         </div>
   
