@@ -1,10 +1,12 @@
 import { useParams, Prompt, useHistory } from 'react-router-dom';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
+import { updateReviews, deleteReview } from '../../store/reviews';
 import { getSessionUser } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
+import ReviewForm from './ReviewForm';
 
 import './SpotPage.css';
 
@@ -13,12 +15,17 @@ export default function SpotPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { setShowModal } = useContext(ModalContext);
-  const spot = useSelector( state => state.spots?.[id] )
-  const user = useSelector( state => state.session?.user )
-
+  const spot = useSelector( state => state.spots?.[id] );
+  const user = useSelector( state => state.session?.user );
+  const reviews = useSelector( state => state.reviews);
+ 
   useEffect(()=>{
     dispatch(getSpot(id));
   }, [dispatch])
+
+  useEffect( ()=> {
+    dispatch(updateReviews(spot?.Reviews))
+  }, [spot, dispatch]);
 
   const openEditModal = e => {
     setShowModal(true);
@@ -35,9 +42,19 @@ export default function SpotPage() {
     }
   } 
 
-  const toggleFavorite = async e => {
+  const toggleFavorite = async e => {};
 
-  }
+
+  const dispatchDeleteReview = id => async e => {
+    
+    const success = await dispatch(deleteReview(id));
+    if( success ){
+      await dispatch(getSpot(spot.id))
+      await dispatch(updateReviews(spot?.Reviews))
+    } else {
+      alert('Unable to delete review')
+    }
+  };
 
   const previewImages = [];
   if( spot?.Images ){
@@ -101,8 +118,29 @@ export default function SpotPage() {
               )}
             </div>
           </div>
-
         </div>
+        )}
+        { spot && (
+          <div className="spot-reviews">
+            <div className="reviews-label spot-info">Reviews</div>
+            <div className="reviews-list">
+              { reviews && Object.values(reviews).map( (r, i) => (
+                <div key={i} className="review spot-info">
+                  <div className="review-body">" {r.body} " –{r.User?.username} </div>
+                  { r.User?.id === user?.id && (
+                    <div className="review-buttons">
+                      <button className="control-button edit-button review-button" onClick={null}>Edit</button>                
+                      <button className="control-button delete-button review-button" onClick={dispatchDeleteReview(r.id)}>Delete</button>                
+                    </div>
+                  )}
+                </div>
+              )) }
+              { reviews && Object.values(reviews).length === 0 && (<div className="spot-info">No Reviews Yet!</div>) }
+            </div>    
+          </div>
+        )}
+        { spot && user && spot.user_id !== user.id && (
+          <ReviewForm spot={spot} />
         )}
       </div>
   )

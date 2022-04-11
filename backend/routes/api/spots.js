@@ -114,10 +114,14 @@ router.get('/favorites', requireAuth, asyncHandler( async (req, res, next) => {
 router.get('/:id', asyncHandler( async (req, res, next) => {
   try {
     const spot = await Spot.findByPk(+req.params.id, {
-      include: [Image, Amenity, District, Review, User, 
+      include: [Image, Amenity, District, User, 
         { 
           model: Booking,
           attributes: ['start_date', 'end_date']
+        },
+        {
+          model: Review,
+          include: User
         }]
     });
 
@@ -173,6 +177,10 @@ router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
             { 
               model: Booking,
               attributes: ['start_date', 'end_date']
+            },
+            {
+              model: Review,
+              include: User
             }]
           });
         console.log(spotInclusive);
@@ -215,6 +223,10 @@ router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
           { 
             model: Booking,
             attributes: ['start_date', 'end_date']
+          }, 
+          {
+            model: Review,
+            include: User
           }]
         });
       console.log(spotInclusive) 
@@ -229,5 +241,42 @@ router.post('/', requireAuth,  asyncHandler( async (req, res, next) => {
   }
 
 }));
+
+// review validators
+
+router.post('/:id/reviews', requireAuth, asyncHandler( async (req, res, next) => {
+  const { body } = req.body;
+  const spotId = req.params.id;
+  
+  try {
+    const review = await Review.create({
+      user_id: +req.user.id,
+      spot_id: +spotId,
+      body,
+      rating: 5
+    })
+    
+    const spotInclusive = await Spot.findByPk(+spotId, {
+      include: [Image, Amenity, District, User, 
+        { 
+          model: Booking,
+          attributes: ['start_date', 'end_date']
+        },
+        {
+          model: Review,
+          include: User
+        }]
+      });
+    
+    return res.json({spot: spotInclusive})
+    
+  } catch (e) {
+    console.log(e);
+    const err = new Error('Unable to create review.')
+    err.status = 500;
+    next(err); 
+  }  
+
+} ));
 
 module.exports = router;

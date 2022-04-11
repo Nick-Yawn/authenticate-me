@@ -69,6 +69,10 @@
   margin: 12px;
 }
 
+.review {
+  margin: 0px 12px;
+}
+
 .host-info {
   padding-top: 24px;
 }
@@ -112,3 +116,22 @@
 .spot-amenity > i {
   padding: 0px 6px;
 }
+
+.spot-reviews {
+  color: var(--main-font-color);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 24px;
+  font-family: inherit;
+}
+
+.review-input {
+  min-height: 67px;
+  border-radius: 5px;
+  font-family: inherit;
+}
+
