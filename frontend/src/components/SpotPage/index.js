@@ -8,6 +8,7 @@ import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
 import ReviewForm from './ReviewForm';
 import Review from './Review';
+import ImageManager from '../ImageManager';
 
 import './SpotPage.css';
 
@@ -114,6 +115,7 @@ export default function SpotPage() {
                     <button className="control-button edit-button" onClick={openEditModal}>Edit Spot</button>
                     <button className="control-button delete-button" onClick={deleteButtonFunc}>Delete Spot</button>
                   </div>
+                    <ImageManager />
                 </>  
               )}
             </div>
