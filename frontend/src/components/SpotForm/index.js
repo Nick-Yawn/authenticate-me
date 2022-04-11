@@ -103,7 +103,6 @@ export default function SpotForm() {
 
     // result format is { errors: [], ok: Boolean, id: }
     const result = await dispatch(postSpot(spotToPost)) 
-    console.log(result);
     if( !result.ok ){ 
       if( result.errors )
         setErrors(result.errors)
