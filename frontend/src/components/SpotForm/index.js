@@ -132,13 +132,6 @@ export default function SpotForm() {
       </ul>
 
       <label>
-        <input type="file"
-          accept=".jpg, .jpeg .png"
-          multiple
-        />
-        Choose images
-      </label>
-      <label>
         Name
         <input
           type="text"
