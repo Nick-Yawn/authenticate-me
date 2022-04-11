@@ -9,6 +9,7 @@ const amenitiesRouter = require('./amenities');
 const districtsRouter = require('./districts');
 const reviewsRouter = require('./reviews');
 const awsRouter = require('./aws')
+const imagesRouter = require('./images')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -17,6 +18,7 @@ router.use('/amenities', amenitiesRouter);
 router.use('/districts', districtsRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/aws', awsRouter);
+router.use('/images', imagesRouter);
 
 /* TEST ROUTE
 router.post('/test', (req, res) => {

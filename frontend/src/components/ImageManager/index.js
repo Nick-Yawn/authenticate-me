@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addImage, getImages } from '../../store/images';
+import { addImage, getImages, deleteImage } from '../../store/images';
 import { getSpot } from '../../store/spots';
 
 import './ImageManager.css'
@@ -69,6 +69,15 @@ export default function ImageManager({ spot }){
     console.log(statuses); 
   }
 
+  const getDeleteHandler = (imgId, spotId) => async e => {
+    const error = await dispatch(deleteImage(imgId));
+    if( error ){
+      alert(error);
+    } else {
+      dispatch(getSpot(spotId)); 
+    }
+  };
+
   return (
     <>
     <button className="image-manager-button control-button" onClick={openImageManager}>Image Manager</button> 
@@ -79,14 +88,14 @@ export default function ImageManager({ spot }){
             <div className="images-modal-list">
             { images && Object.values(images).map( (img, i) => (
               <div key={i} className="image-manager-image">
-                <i class="fa-solid fa-xmark-large" onClick={null}/>
+                <i className="fa-solid fa-xmark-large" onClick={getDeleteHandler(img.id, id)}/>
                 <div className='img-thumbnail' style={{backgroundImage: `url(${img.url})`}} />
                 {img.url.slice(47)}
               </div>
             ))}
             </div>
             <input type="file" id="img-input" name="img-input"  multiple accept=".png,.jpg,.jpeg" onChange={handleFiles}/>
-            <label for="img-input" className="img-input-label">Select Images</label>
+            <label htmlFor="img-input" className="img-input-label">Select Images</label>
           </div>
         </div>
   
