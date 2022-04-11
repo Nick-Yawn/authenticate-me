@@ -120,3 +120,18 @@
 .spot-reviews {
   color: var(--main-font-color);
 }
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 24px;
+  font-family: inherit;
+}
+
+.review-input {
+  min-height: 67px;
+  border-radius: 5px;
+  font-family: inherit;
+}
+

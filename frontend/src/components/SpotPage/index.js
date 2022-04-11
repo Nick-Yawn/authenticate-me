@@ -2,7 +2,7 @@ import { useParams, Prompt, useHistory } from 'react-router-dom';
 import { useEffect, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpot, deleteSpot } from '../../store/spots'
-import { updateReviews } from '../../store/reviews';
+import { updateReviews, deleteReview } from '../../store/reviews';
 import { getSessionUser } from '../../store/session';
 import { ModalContext } from '../../context/Modal';
 import { setSpotToEdit } from '../../store/spotToEdit';
@@ -19,8 +19,6 @@ export default function SpotPage() {
   const user = useSelector( state => state.session?.user );
   const reviews = useSelector( state => state.reviews);
  
-  console.log(reviews); 
-
   useEffect(()=>{
     dispatch(getSpot(id));
   }, [dispatch])
@@ -44,9 +42,19 @@ export default function SpotPage() {
     }
   } 
 
-  const toggleFavorite = async e => {
+  const toggleFavorite = async e => {};
 
-  }
+
+  const dispatchDeleteReview = id => async e => {
+    
+    const success = await dispatch(deleteReview(id));
+    if( success ){
+      await dispatch(getSpot(spot.id))
+      await dispatch(updateReviews(spot?.Reviews))
+    } else {
+      alert('Unable to delete review')
+    }
+  };
 
   const previewImages = [];
   if( spot?.Images ){
@@ -118,8 +126,13 @@ export default function SpotPage() {
             <div className="reviews-list">
               { reviews && Object.values(reviews).map( (r, i) => (
                 <div key={i} className="review spot-info">
-                  <div className="review-body">{r.body} -{r.User?.username} </div>
-                  
+                  <div className="review-body">" {r.body} " –{r.User?.username} </div>
+                  { r.User?.id === user?.id && (
+                    <div className="review-buttons">
+                      <button className="control-button edit-button review-button" onClick={null}>Edit</button>                
+                      <button className="control-button delete-button review-button" onClick={dispatchDeleteReview(r.id)}>Delete</button>                
+                    </div>
+                  )}
                 </div>
               )) }
               { reviews && Object.values(reviews).length === 0 && (<div className="spot-info">No Reviews Yet!</div>) }

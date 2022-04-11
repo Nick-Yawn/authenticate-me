@@ -16,7 +16,12 @@ export default function SpotForm() {
   const user          = useSelector(state => state.session?.user);
   const spotToEdit    = useSelector(state => state.spotToEdit);
   const amenitiesList = useSelector(state => state.amenities);
-  const districtsList = useSelector(state => state.districts)
+  const districtsList = useSelector(state => state.districts);
+ /* const [ img1, setImg1 ]       = useState(''); 
+  const [ img2, setImg2 ]       = useState('');
+  const [ img3, setImg3 ]       = useState(''); 
+  const [ img4, setImg4 ]       = useState(''); 
+  const [ img5, setImg5 ]       = useState(''); */
   const [ name, setName ]       = useState(spotToEdit?.name || '') // REQ
   const [ address, setAddress ] = useState(spotToEdit?.address || '')
   const [ city, setCity ]       = useState(spotToEdit?.city || '') // REQ
@@ -58,6 +63,11 @@ export default function SpotForm() {
   },[name, description, city, country, price])
   
   // event handlers 
+/*  const updateImg1        = e => setImg1(       e.target.value);
+  const updateImg2        = e => setImg2(       e.target.value);
+  const updateImg3        = e => setImg3(       e.target.value);
+  const updateImg4        = e => setImg4(       e.target.value);
+  const updateImg5        = e => setImg5(       e.target.value);*/
   const updateName        = e => setName(       e.target.value);
   const updateAddress     = e => setAddress(    e.target.value);
   const updateCity        = e => setCity(       e.target.value);
@@ -121,6 +131,13 @@ export default function SpotForm() {
         {errors && errors.map( (e,i) => <li key={i}>{e}</li> )}
       </ul>
 
+      <label>
+        <input type="file"
+          accept=".jpg, .jpeg .png"
+          multiple
+        />
+        Choose images
+      </label>
       <label>
         Name
         <input

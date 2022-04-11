@@ -11,6 +11,9 @@ export default function ReviewForm({ spot }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    if( body.length < 2 ){
+      return alert('Your review must have a meaningful length.')
+    }
 
     const result = await dispatch(addReview(spot, body));
     if( result.ok ) {
@@ -25,17 +28,13 @@ export default function ReviewForm({ spot }) {
  
   return (
     <form onSubmit={handleSubmit} className="review-form">
-      { errors?.length > 0 && (
-        <ul>
-          {errors.map( (e, i) => (<li key={i}>e.message</li>))}
-        </ul>
-      )}
       <textarea 
         placeholder="Leave your review..."
         value={body}
+        className="review-input"
         onChange={updateBody}
       /> 
-      <button>Submit Review</button>
+      <button className="review-submit-button control-button">Submit Review</button>
     </form>
   ); 
 }
